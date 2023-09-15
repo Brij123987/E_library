@@ -1,3 +1,5 @@
+{% extends 'book/base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+    {% block body %}
     <h1>This is a Magazine Page</h1>
 
     {% for magazine in magazinelist %}
@@ -20,6 +23,7 @@
         
     
     {% endfor %}
+    {% endblock %}
 
 </body>
 </html>
