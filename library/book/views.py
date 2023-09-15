@@ -35,4 +35,27 @@ def comic(request):
     return render(request, 'book/comic.html', context)
 
 def detail(request, item_id):
-    return HttpResponse(f'item_id:{item_id}')
+    item = Newspaper.objects.get(pk = item_id)
+
+    context ={
+        'item':item
+    }
+    return render (request, 'book/detail.html', context)
+
+def detail_m(request, magazine_id):
+    magazine = Magazine.objects.get(pk = magazine_id)
+
+    context = {
+        'magazine':magazine
+    }
+
+    return render(request, 'book/detail_m.html', context)
+
+def detail_c(request, comic_id):
+    comic = Comic.objects.get(pk = comic_id)
+
+    context = {
+        'comic':comic
+    }
+
+    return render(request, 'book/detail_c.html', context)
