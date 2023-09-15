@@ -9,7 +9,12 @@
     <h1> This is an Newspaper Page</h1>
 
     {% for item in itemlist %}
-        {{ item }}
+    <ul>
+        <li>
+            {{ item.id }} -- {{ item.item_name }}
+        </li>
+    </ul>
+        
     
     {% endfor %}
 

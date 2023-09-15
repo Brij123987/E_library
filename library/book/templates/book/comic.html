@@ -9,7 +9,12 @@
     <h1>This a Comic Page</h1>
 
     {% for comic in comiclist %}
-        {{ comic }}
+    <ul>
+        <li>
+            {{ comic.id }} -- {{ comic.comic_name }}
+        </li>
+    </ul>
+        
 
     {% endfor %}
 

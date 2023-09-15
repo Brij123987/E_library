@@ -34,5 +34,5 @@ def comic(request):
 
     return render(request, 'book/comic.html', context)
 
-def detail(request):
-    return HttpResponse('<h1 style="color:Blue">This is a Detail Page</h1>')
+def detail(request, item_id):
+    return HttpResponse(f'item_id:{item_id}')

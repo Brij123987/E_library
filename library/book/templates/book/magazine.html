@@ -9,7 +9,13 @@
     <h1>This is a Magazine Page</h1>
 
     {% for magazine in magazinelist %}
-        {{ magazine }}
+
+    <ul>
+        <li>
+            {{ magazine.id }} -- {{ magazine.magazine_name }}
+        </li>
+    </ul>
+        
     
     {% endfor %}
 
