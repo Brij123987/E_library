@@ -11,7 +11,9 @@
     {% for comic in comiclist %}
     <ul>
         <li>
-            {{ comic.id }} -- {{ comic.comic_name }}
+            <a href="/book/detail_c/{{ comic.id }}/">
+                {{ comic.id }} -- {{ comic.comic_name }}
+            </a>
         </li>
     </ul>
         
