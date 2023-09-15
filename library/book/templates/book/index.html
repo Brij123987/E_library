@@ -11,7 +11,7 @@
     {% for item in itemlist %}
     <ul>
         <li>
-            <a href="{% url 'detail' item.id %}">
+            <a href="{% url 'book:detail' item.id %}">
                 {{ item.id }} -- {{ item.item_name }}
             </a>
         </li>
