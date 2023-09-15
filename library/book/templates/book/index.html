@@ -8,6 +8,10 @@
 <body>
     <h1> This is an Newspaper Page</h1>
 
-    {{ itemlist }}
+    {% for item in itemlist %}
+        {{ item }}
+    
+    {% endfor %}
+
 </body>
 </html>

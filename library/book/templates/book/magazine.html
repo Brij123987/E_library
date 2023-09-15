@@ -8,7 +8,10 @@
 <body>
     <h1>This is a Magazine Page</h1>
 
-    {{ magazinelist }}
+    {% for magazine in magazinelist %}
+        {{ magazine }}
     
+    {% endfor %}
+
 </body>
 </html>

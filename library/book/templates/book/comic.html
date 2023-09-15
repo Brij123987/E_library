@@ -8,7 +8,10 @@
 <body>
     <h1>This a Comic Page</h1>
 
-    {{ comiclist }}
-    
+    {% for comic in comiclist %}
+        {{ comic }}
+
+    {% endfor %}
+
 </body>
 </html>
