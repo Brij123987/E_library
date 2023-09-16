@@ -9,17 +9,64 @@
 </head>
 <body>
     {% block body %}
-    <h1>This is a Magazine Page</h1>
 
     {% for magazine in magazinelist %}
-
-    <ul>
-        <li>
-            <a href="{% url 'book:detail_m' magazine.id %}">
-                {{ magazine.id }} -- {{ magazine.magazine_name }}
+    <div class="row mb-4">
+        <div class="col-md-1.5 offset-md-3">
+            <img 
+            src="{{ magazine.magazine_image }}"
+            class="card"
+            height="160px"
+            width="140px"
+            >
+        </div>
+        <div class="col-md-3">
+            <h3
+            style="font-size: 1.5rem;"
+            >
+                {{ magazine.magazine_name }}
+            </h3>
+            <h5
+            style="font-style: italic;
+            font-size: 1rem;
+            "
+            >
+                {{ magazine.magazine_desc | truncatewords:4 }}
+            </h5>
+            <h5
+            style="font-style: italic;">
+                Rs.{{ magazine.magazine_price }}
+            </h5>
+            <h6
+            style="font-style: italic;"
+            >
+                added for: {{ magazine.for_user }}
+            </h6>
+            <h6
+            style="font-style: italic;"
+            >
+                added by superuser:
+            </h6>
+        </div>
+        <div class="col-md-3 offset-md-5 mb-4">
+            <a 
+            href="" download
+            style="width: 80px;"
+            class="btn btn-primary"
+            >
+                Open
             </a>
-        </li>
-    </ul>
+            <a 
+            href="{% url 'book:detail_m' magazine.id %}"
+            style="width: 80px;"
+            class="btn btn-success"
+            >
+                Detail
+            </a>
+        </div>
+
+    </div>
+
         
     
     {% endfor %}
