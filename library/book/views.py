@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
+from book.forms import NewspaperForm, MagazineForm, ComicForm
 
 
 # Create your views here.
@@ -59,3 +60,30 @@ def detail_c(request, comic_id):
     }
 
     return render(request, 'book/detail_c.html', context)
+
+
+def create_item(request):
+    form = NewspaperForm(request.POST or None)
+    form_1 = MagazineForm(request.POST or None)
+    form_2 = ComicForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('book:index')
+    
+    elif form_1.is_valid():
+        form_1.save()
+        return redirect('book:magazine')
+    
+    elif form_2.is_valid():
+        form_2.save()
+        return redirect('book:comic')
+    
+    context = {
+        'form':form,
+        'form_1':form_1,  
+        'form_2':form_2
+    }
+
+    return render(request, 'book/item-form.html', context)
+    

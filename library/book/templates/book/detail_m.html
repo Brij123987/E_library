@@ -9,9 +9,65 @@
 </head>
 <body>
     {% block body %}
-    <h1>{{ magazine.magazine_name }}</h1>
-    <h1>{{ magazine.magazine_desc }}</h1>
-    <h1>{{ magazine.magazine_price }}</h1>
-    {% endblock %}
+    <div class="row">
+        <div class="col-md-2 offset-md-1">
+            <img 
+            src="{{ magazine.magazine_image }}"
+            height="160px"
+            width="140px"
+            class="card"
+            >
+
+        </div>
+        <div class="col-md-4 offset-md-1">
+            <h1
+            style="font-style: italic;">
+            {{ magazine.magazine_name }}
+            </h1>
+
+            <h3
+            style="font-style: italic;
+            font-size: 1.3rem;
+            text-align: justify;
+            "
+            >
+                {{ magazine.magazine_desc }}
+            </h3>
+
+            <h5
+            style="font-style: italic;"
+            >
+                <b>Rs.{{ magazine.magazine_price }}</b>
+            </h5>
+
+        </div>
+    </div>
+    <div class="col-md-3 offset-md-1">
+
+        <a 
+        href="#"
+        style="width: 80px;"
+        class="btn btn-warning"
+        >
+        Edit
+        </a>
+
+        <a 
+        href="#"
+        style="width: 80px"
+        class="btn btn-danger"
+        >
+        Delete
+        </a>
+
+        <a 
+        href="#"
+        style="width: 80px"
+        class="btn btn-success"
+        >
+        Back
+        </a>
+
+    </div>    {% endblock %}
 </body>
 </html>

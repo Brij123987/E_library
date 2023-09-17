@@ -35,7 +35,7 @@
             </h5>
             <h5
             style="font-style: italic;">
-                Rs.{{ magazine.magazine_price }}
+                <b>Rs.{{ magazine.magazine_price }}</b>
             </h5>
             <h6
             style="font-style: italic;"
@@ -48,13 +48,27 @@
                 added by superuser:
             </h6>
         </div>
-        <div class="col-md-3 offset-md-5 mb-4">
+        <div class="col-md-6 offset-md-5 mb-4">
             <a 
             href="" download
             style="width: 80px;"
             class="btn btn-primary"
             >
                 Open
+            </a>
+            <a 
+            href="#"
+            style="width: 150px;"
+            class="btn btn-warning"
+            >
+                Add to Cart
+            </a>
+            <a 
+            href="#"
+            style="width: 80px;"
+            class="btn btn-info"
+            >
+                Buy
             </a>
             <a 
             href="{% url 'book:detail_m' magazine.id %}"
