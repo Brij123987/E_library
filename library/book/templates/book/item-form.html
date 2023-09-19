@@ -1,3 +1,5 @@
+{% extends 'book/base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,35 +8,106 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Add Newspaper:</h1>
-    <form method="POST" action="">
 
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">
-            Save
-        </button>
+{% block body %}
+<div class="row">
+    <div class="col-md-3 offset-md-1">
+        <h1>Add Newspaper:</h1>
+        <form method="POST" action="">
+    
+            {% csrf_token %}
 
-    </form>
+            <label><b>Product Code: </b></label><br>
+            {{ form.prod_code }}
+            <br>
+            <label><b>For User: </b></label><br>
+            {{ form.for_user }}
+            <br>
+            <label><b>Newspaper Name: </b></label><br>
+            {{ form.item_name }}
+            <br>
+            <label><b>Newspaper Description: </b></label><br>
+            {{ form.item_desc }}
+            <br>
+            <label><b>Newspaper Price: </b></label><br>
+            {{ form.item_price }}
+            <br>
+            <label><b>Newspaper Image: </b></label><br>
+            {{ form.item_image }}
+            <br>
 
-    <h1>Add Magazine's: </h1>
-    <form method="POST" action="">
+            <button type="submit">
+                Save
+            </button>
+        </form>
+    </div>
 
-        {% csrf_token %}
-        {{ form_1 }}
-        <button type="submit">
-            Save
-        </button>
-    </form>
 
-    <h1>Add Comis'c</h1>
-    <form method="POST" action="">
+    
 
-        {% csrf_token %}
-        {{ form_2 }}
-        <button type="submit">
-            Save
-        </button>
-    </form>
+    <div class="col-md-3 offset-md-1">
+        <h1>Add Magazine's: </h1>
+        <form method="POST" action="">
+    
+            {% csrf_token %}
+            <label><b>Product Code: </b></label><br>
+            {{ form_1.prod_code }}
+            <br>
+            <label><b>For User: </b></label><br>
+            {{ form_1.for_user }}
+            <br>
+            <label><b>Magazine Name: </b></label><br>
+            {{ form_1.magazine_name }}
+            <br>
+            <label><b>Magazine Description: </b></label><br>
+            {{ form_1.magazine_desc }}
+            <br>
+            <label><b>Magazine Price: </b></label><br>
+            {{ form_1.magazine_price }}
+            <br>
+            <label><b>Magazine Image: </b></label><br>
+            {{ form_1.magazine_image }}
+            <br>
+
+
+            <button type="submit">
+                Save
+            </button>
+        </form>
+    </div>
+
+    <div class="col-md-3 offset-md-1">
+        <h1>Add Comic's</h1>
+        <form method="POST" action="">
+    
+            {% csrf_token %}
+            
+            <label><b>Product Code: </b></label><br>
+            {{ form_2.prod_code }}
+            <br>
+            <label><b>For User: </b></label><br>
+            {{ form_2.for_user }}
+            <br>
+            <label><b>Comic Name: </b></label><br>
+            {{ form_2.comic_name }}
+            <br>
+            <label><b>Comic Description: </b></label><br>
+            {{ form_2.comic_desc }}
+            <br>
+            <label><b>Comic Price: </b></label><br>
+            {{ form_2.comic_price }}
+            <br>
+            <label><b>Comic Image: </b></label><br>
+            {{ form_2.comic_image }}
+            <br>
+
+
+            <button type="submit">
+                Save
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
 </body>
 </html>
