@@ -9,7 +9,7 @@
 </head>
 <body>
     {% block body %}
-    <div class="row">
+    <div class="row mb-5" >
         <div class="col-md-2 offset-md-1">
             <img 
             src="{{ item.item_image }}"
@@ -19,7 +19,7 @@
             >
 
         </div>
-        <div class="col-md-4 offset-md-1">
+        <div class="col-md-4 offset-md-0">
             <h1
             style="font-style: italic;">
             {{ item.item_name }}
@@ -41,34 +41,35 @@
             </h5>
 
         </div>
+        <div class="col-md-3 offset-md-1">
+
+            <a 
+            href="#"
+            style="width: 80px;"
+            class="btn btn-warning"
+            >
+            Edit
+            </a>
+    
+            <a 
+            href="#"
+            style="width: 80px"
+            class="btn btn-danger"
+            >
+            Delete
+            </a>
+    
+            <a 
+            href="#"
+            style="width: 80px"
+            class="btn btn-success"
+            >
+            Back
+            </a>
+    
+        </div>
     </div>
-    <div class="col-md-3 offset-md-1">
-
-        <a 
-        href="#"
-        style="width: 80px;"
-        class="btn btn-warning"
-        >
-        Edit
-        </a>
-
-        <a 
-        href="#"
-        style="width: 80px"
-        class="btn btn-danger"
-        >
-        Delete
-        </a>
-
-        <a 
-        href="#"
-        style="width: 80px"
-        class="btn btn-success"
-        >
-        Back
-        </a>
-
-    </div>
+    
     {% endblock %}
 </body>
 </html>

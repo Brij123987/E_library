@@ -113,7 +113,27 @@
     </div>
     <div class="col-md-3 offset-md-1">
       <p style="color: white; font-size: 1.2rem; font-style: italic;"><b>Write to us</b></p>
-      <form action="">
+      <form method="POST">
+      <table>
+        <tr>
+          <td><label for="email" style="color: white;"><b>Email:</b></label></td>
+          <td><input type="email" name="email" id="email" class="card"></td>
+        </tr>
+        <tr>
+          <td><label for="subject" style="color: white;"><b>Subject:</b></label></td>
+          <td><input type="text" name="text" id="text" class="card"></td>
+        </tr>
+        <tr>
+          <td><label for="message" style="color: white;"><b>Message:</b></label></td>
+        </tr>
+        <tr>
+          <td colspan="2"><textarea name="message" id="message" cols="40" rows="5" class="card">Type your message! </textarea></td>
+        </tr>
+        <tr>
+          <td colspan="2"><button type="submit" class="card" style="color:black; background-color: #008CBA; font-size: 1rem;"><b>Send</b></button></td>
+        </tr>
+      </table>
+        
 
       </form>
 
