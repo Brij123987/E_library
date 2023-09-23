@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
-from book.models import Title_Page
 from book.forms import NewspaperForm, MagazineForm, ComicForm
 
 
@@ -35,16 +34,6 @@ def comic(request):
     }
 
     return render(request, 'book/comic.html', context)
-
-def title(request):
-    titlelist = Title_Page.objects.all()
-
-
-    context = {
-        'titlelist':titlelist
-    }
-
-    return render(request, 'book/title.html', context)
 
 def detail(request, item_id):
     item = Newspaper.objects.get(pk = item_id)
