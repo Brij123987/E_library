@@ -50,14 +50,13 @@ class Magazine(models.Model):
     def __str__(self):
         return self.magazine_name
 
-# class Title_Page(models.Model):
-#     title_name = models.CharField(max_length=200)
-#     title_image = models.CharField(
-#                                     max_length=500,
-#                                     default="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/1200px-Placeholder_book.svg.png"
-#                                     )
+class Contact(models.Model):
+    email = models.EmailField()
+    subject = models.CharField(max_length=250)
+    message = models.TextField()
 
-#     def __str__(self):
-#         return self.title_name
+    def __str__(self):
+        return self.email
+        
     
         

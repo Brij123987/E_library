@@ -11,4 +11,5 @@ urlpatterns = [
     path('detail_m/<int:magazine_id>/',views.detail_m, name='detail_m'),
     path('detail_c/<int:comic_id>/',views.detail_c, name= 'detail_c'),
     path('add/',views.create_item, name='create_item'),
+    path('contact/',views.contact_view, name='contact'),
 ]

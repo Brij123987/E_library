@@ -111,9 +111,15 @@
       <a href="#" class="fa fa-twitter"></a>
       <a href="#" class="fa fa-linkedin"></a>
     </div>
+
+
     <div class="col-md-3 offset-md-1">
       <p style="color: white; font-size: 1.2rem; font-style: italic;"><b>Write to us</b></p>
-      <form method="POST">
+      
+      <form method="POST" action="contact_view">
+        {% csrf_token %}
+
+
       <table>
         <tr>
           <td><label for="email" style="color: white;"><b>Email:</b></label></td>

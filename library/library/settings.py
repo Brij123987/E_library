@@ -122,3 +122,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+
+CONTACT_EMAIL = 'brijeshyadav9811@gmail.com'
+ADMIN_EMAIL = 'brijeshyadav9811@gmail.com'
+
+
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 587
+EMAIL_USE_USER = True
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.environ.get('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')

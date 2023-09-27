@@ -2,6 +2,7 @@ from django import forms
 from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
+from book.models import Contact
 
 class NewspaperForm(forms.ModelForm):
     class Meta:
@@ -17,3 +18,8 @@ class ComicForm(forms.ModelForm):
     class Meta:
         model = Comic
         fields = ['prod_code','for_user','comic_name','comic_desc','comic_price','comic_image']
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['email','subject','message']
