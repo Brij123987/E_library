@@ -8,40 +8,43 @@
     <title>Document</title>
 </head>
 <body>
+    {% block body %}
 
-{% block body %}
+
 <div class="row">
     <div class="col-md-3 offset-md-1">
-        <h1>Add Newspaper:</h1>
+        <h1>Add Magazine's: </h1>
         <form method="POST" action="">
     
             {% csrf_token %}
-
             <label><b>Product Code: </b></label><br>
-            {{ form.prod_code }}
+            {{ form_1.prod_code }}
             <br>
             <label><b>For User: </b></label><br>
-            {{ form.for_user }}
+            {{ form_1.for_user }}
             <br>
-            <label><b>Newspaper Name: </b></label><br>
-            {{ form.item_name }}
+            <label><b>Magazine Name: </b></label><br>
+            {{ form_1.magazine_name }}
             <br>
-            <label><b>Newspaper Description: </b></label><br>
-            {{ form.item_desc }}
+            <label><b>Magazine Description: </b></label><br>
+            {{ form_1.magazine_desc }}
             <br>
-            <label><b>Newspaper Price: </b></label><br>
-            {{ form.item_price }}
+            <label><b>Magazine Price: </b></label><br>
+            {{ form_1.magazine_price }}
             <br>
-            <label><b>Newspaper Image: </b></label><br>
-            {{ form.item_image }}
+            <label><b>Magazine Image: </b></label><br>
+            {{ form_1.magazine_image }}
             <br>
+
 
             <button type="submit">
                 Save
             </button>
         </form>
-    </div> 
+    </div>
 </div>
-{% endblock %}
+
+
+    {% endblock %}
 </body>
 </html>

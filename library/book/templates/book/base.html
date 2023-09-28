@@ -12,33 +12,86 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'book/style.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+      /* styles.css */
+.navbar {
+  background-color: #333;
+}
+
+.nav-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+}
+
+.nav-item:hover .dropdown-content {
+  display: block;
+}
+
+    </style>
 
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <a href="{% url 'book:index' %}" class="navbar-brand" style="font-style: italic; font-size: 2rem;">
-          E-Library
-        </a>
-        <div class="navbar">
-          <a href="{% url 'book:create_item' %}" class="nav-item nav-link btn btn-dark">
-            Add Item
-          </a>
 
-          <a href="#" class="nav-item nav-link btn btn-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'book:index' %}" style="font-size: 2rem;"><i>E-Library</i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown" style="justify-content: right;">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">
             Cart
           </a>
-
-          <a href="#" class="nav-item nav-link btn btn-dark">
-            Profile
+        </li>
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link">
+            Add Item
           </a>
-
-          <a href="#" class="nav-item nav-link btn btn-dark">
-            Sign Up
+          <div class="dropdown-content">
+            <a href="{% url 'book:create_item' %} " class="nav-item nav-link btn btn-dark">Newspaper</a>
+            <a href="{% url 'book:create_magazine' %}" class="nav-item nav-link btn btn-dark">Magazine</a>
+            <a href="{% url 'book:create_comic' %}" class="nav-item nav-link btn btn-dark">Comic</a>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+              Profile
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+              Sign Up
           </a>
+        </li>
+          </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
 
-        </div>
-    </nav>
-    <nav aria-label="..." class="offset-md-4">
+
+<div class="mb-1">
+
+</div>
+    <div class="offset-md-0">
       <ul class="pagination pagination-lg">
         <li class="#" aria-current="page">
           <a class="page-link" href="{% url 'book:index' %}">
@@ -74,7 +127,7 @@
           >
         </a></li>
       </ul>
-    </nav>
+    </div>
     <div class="mb-5">
 
     </div>
@@ -82,6 +135,9 @@
         {% block body %}
         {% endblock %}
 
+<div class="mb-5">
+<!-- For spacing -->
+</div>
 
 <div class="card-footer bg-dark border-dark">
   <div class="row">

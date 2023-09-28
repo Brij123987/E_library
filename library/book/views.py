@@ -76,28 +76,126 @@ def detail_c(request, comic_id):
 
 def create_item(request):
     form = NewspaperForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('book:index')
+      
+    context = {
+        'form':form
+    }
+
+    return render(request, 'book/item-form.html', context)
+
+def create_magazine(request):
     form_1 = MagazineForm(request.POST or None)
+
+    if form_1.is_valid():
+        form_1.save()
+        return redirect('book:magazine')
+    
+    context = {
+        'form_1':form_1
+    }
+
+    return render(request, 'book/magazine-form.html', context)
+
+def create_comic(request):
     form_2 = ComicForm(request.POST or None)
+
+    if form_2.is_valid():
+        form_2.save()
+        return redirect('book:comic')
+    
+    context = {
+        'form_2':form_2
+    }
+
+    return render(request, 'book/comic-form.html', context)
+    
+
+def update_item(request, item_id):
+    item = Newspaper.objects.get(pk = item_id)
+    form = NewspaperForm(request.POST or None, instance=item)
+
 
     if form.is_valid():
         form.save()
         return redirect('book:index')
     
-    elif form_1.is_valid():
-        form_1.save()
-        return redirect('book:magazine')
-    
-    elif form_2.is_valid():
-        form_2.save()
-        return redirect('book:comic')
-    
     context = {
-        'form':form,
-        'form_1':form_1,  
-        'form_2':form_2
+        'form': form
     }
 
     return render(request, 'book/item-form.html', context)
+
+def update_magazine(request, magazine_id):
+    magazine = Magazine.objects.get(pk = magazine_id)
+    form_1 = MagazineForm(request.POST or None, instance=magazine)
+
+    if form_1.is_valid():
+        form_1.save()
+        return redirect('book:magazine')
+    
+    context ={
+        'form_1': form_1
+    }
+
+    return render(request, 'book/magazine-form.html', context)
+
+def update_comic(request, comic_id):
+    comic = Comic.objects.get(pk = comic_id)
+    form_2 = ComicForm(request.POST or None, instance=comic)
+
+    if form_2.is_valid():
+        form_2.save()
+        return redirect('book:comic')
+    
+    context ={
+        'form_2': form_2
+    }
+
+    return render(request, 'book/comic-form.html', context)
+
+def delete_item(request, item_id):
+    item = Newspaper.objects.get(pk = item_id)
+
+    context = {
+        'item':item
+    }
+
+    if request.method == 'POST':
+        item.delete()
+        return redirect('book:index')
+    
+    return render(request, 'book/delete-item.html', context)
+
+def delete_magazine(request, magazine_id):
+    magazine = Magazine.objects.get(pk = magazine_id)
+
+    context = {
+        'magazine':magazine
+    }
+
+    if request.method == 'POST':
+        magazine.delete()
+        return redirect('book:magazine')
+
+    return render(request, 'book/delete-magazine.html', context)
+
+def delete_comic(request, comic_id):
+    comic = Comic.objects.get(pk = comic_id)
+
+    context = {
+        'comic':comic
+    }
+
+    if request.method == "POST":
+        comic.delete()
+        return redirect('book:comic')
+    
+    return render(request, 'book/delete-comic.html', context)
+
 
 def contact_view(request):
     if request.method == 'POST':

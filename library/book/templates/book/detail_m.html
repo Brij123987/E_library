@@ -44,7 +44,7 @@
         <div class="col-md-3 offset-md-1">
 
             <a 
-            href="#"
+            href="{% url 'book:update_magazine' magazine.id %}"
             style="width: 80px;"
             class="btn btn-warning"
             >
@@ -52,7 +52,7 @@
             </a>
     
             <a 
-            href="#"
+            href="{% url 'book:delete_magazine' magazine.id %}"
             style="width: 80px"
             class="btn btn-danger"
             >
@@ -60,7 +60,7 @@
             </a>
     
             <a 
-            href="#"
+            href="{% url 'book:magazine' %}"
             style="width: 80px"
             class="btn btn-success"
             >

@@ -1,0 +1,48 @@
+{% extends 'book/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block body %}
+
+    <div class="row">
+        <div class="col-md-3 offset-md-1">
+            <h1>Add Comic's</h1>
+            <form method="POST" action="">
+        
+                {% csrf_token %}
+                
+                <label><b>Product Code: </b></label><br>
+                {{ form_2.prod_code }}
+                <br>
+                <label><b>For User: </b></label><br>
+                {{ form_2.for_user }}
+                <br>
+                <label><b>Comic Name: </b></label><br>
+                {{ form_2.comic_name }}
+                <br>
+                <label><b>Comic Description: </b></label><br>
+                {{ form_2.comic_desc }}
+                <br>
+                <label><b>Comic Price: </b></label><br>
+                {{ form_2.comic_price }}
+                <br>
+                <label><b>Comic Image: </b></label><br>
+                {{ form_2.comic_image }}
+                <br>
+                <button type="submit">
+                    Save
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    {% endblock %}
+</body>
+</html>
