@@ -201,16 +201,20 @@ def contact_view(request):
     if request.method == 'POST':
         contact_1 = ContactForm(request.POST or None)
         if contact_1.is_valid():
-            contact_1.save()
-
+            
             email_subject = f'New contact {contact_1.cleaned_data["email"]}: {contact_1.cleaned_data["subject"]}'
             
             email_message = contact_1.cleaned_data['message']
             send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAIL)
-            return render(request, 'book/index.html')
-        
-    contact_1 = ContactForm()
-    context = {
+
+            contact_1.save()
+            return redirect('book:index')
+
+    else:
+        contact_1 = ContactForm()
+
+        context = {
         'contact_1': contact_1
-    }
-    return render(request, 'book/base.html', context)
+        }
+
+        return render(request, 'book/index.html', context)
