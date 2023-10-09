@@ -1,0 +1,40 @@
+{% extends 'book/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block content %}
+
+    <form action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label for="email" style="color: white;">Email:</label></td>
+                <td>{{ contact_1.email }}</td>
+            </tr>
+            <tr>
+                <td><label for="subject" style="color: white;">Subject:</label></td>
+                <td>{{ contact_1.subject }}</td>
+            </tr>
+            <tr>
+                <td><label for="message" style="color: white;">Message:</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">{{ contact_1.message }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit" class="card">Send</button></td>
+            </tr>
+
+        </table>
+
+    </form>
+
+    {% endblock %}
+</body>
+</html>

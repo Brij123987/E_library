@@ -53,10 +53,19 @@ class Magazine(models.Model):
 class Contact(models.Model):
     email = models.EmailField()
     subject = models.CharField(max_length=250)
-    message = models.TextField()
+    message = models.TextField(max_length=100)
 
     def __str__(self):
         return self.email
         
-    
+
+class ELibraryModels(models.Model):
+    title = models.CharField(max_length=100)
+    pdf = models.FileField(upload_to='pfds/')
+
+    class Meta:
+        ordering: ['title']
+
+    def __str__(self):
+        return self.title
         

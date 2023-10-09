@@ -1,4 +1,4 @@
-{% extends 'book/base.html' %}
+{% extends 'book/base_form.html' %}
 
 
 
@@ -60,20 +60,6 @@
             class="btn btn-primary"
             >
                 Open
-            </a>
-            <a 
-            href="#"
-            style="width: 150px;"
-            class="btn btn-warning"
-            >
-                Add to Cart
-            </a>
-            <a 
-            href="#"
-            style="width: 80px;"
-            class="btn btn-info"
-            >
-                Buy
             </a>
             <a 
             href="{% url 'book:detail' item.id %}"

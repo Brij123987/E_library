@@ -5,6 +5,7 @@ app_name = 'book'
 
 urlpatterns = [
     path('home/', views.index, name='index'),
+    path('base_page/',views.contact_view,name='base_page'),
     path('magazine/', views.magazine, name='magazine'),
     path('comic/',views.comic, name='comic'),
     path('detail/<int:item_id>/', views.detail, name='detail'),
@@ -20,4 +21,5 @@ urlpatterns = [
     path('delete_magazine/<int:magazine_id>/',views.delete_magazine,name='delete_magazine'),
     path('delete_comic/<int:comic_id>/',views.delete_comic,name='delete_comic'),
     path('contact/',views.contact_view, name='contact'),
+    path('upload/', views.BookUploadView, name='bookupload'),
 ]

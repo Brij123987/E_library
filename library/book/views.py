@@ -5,8 +5,8 @@ from django.http import HttpResponse
 from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
-from book.models import Contact
-from book.forms import NewspaperForm, MagazineForm, ComicForm, ContactForm
+from book.models import ELibraryModels
+from book.forms import NewspaperForm, MagazineForm, ComicForm, ContactForm, UploadBookForm
 
 
 # Create your views here.
@@ -37,15 +37,6 @@ def comic(request):
     }
 
     return render(request, 'book/comic.html', context)
-
-def contact(request):
-    contact_list = Contact.objects.all()
-
-    context = {
-        'contact_list':contact_list
-    }
-
-    return render(request, 'book/base.html', context)
 
 def detail(request, item_id):
     item = Newspaper.objects.get(pk = item_id)
@@ -199,22 +190,35 @@ def delete_comic(request, comic_id):
 
 def contact_view(request):
     if request.method == 'POST':
-        contact_1 = ContactForm(request.POST or None)
+        contact_1 = ContactForm(request.POST)
+        
         if contact_1.is_valid():
-            
             email_subject = f'New contact {contact_1.cleaned_data["email"]}: {contact_1.cleaned_data["subject"]}'
-            
             email_message = contact_1.cleaned_data['message']
-            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAIL)
-
             contact_1.save()
+            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAIL)
             return redirect('book:index')
 
     else:
         contact_1 = ContactForm()
-
         context = {
         'contact_1': contact_1
         }
+        
+    return render(request, 'book/base_form.html', context)
 
-        return render(request, 'book/index.html', context)
+
+def BookUploadView(request):
+    if request.method == 'POST':
+        form_book = UploadBookForm(request.POST, request.FILES)
+        if form_book.is_valid():
+            form_book.save()
+            return redirect('book:index')
+        
+    else:
+        form_book = UploadBookForm()
+        context = {
+            'form_book':form_book
+        }
+        
+    return render(request, 'book/uploadbook.html', context)

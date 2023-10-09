@@ -12,7 +12,7 @@ def register(request):
 
         if form.is_valid():
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Welcome {username}, you account have been successfully created')
+            messages.success(request, f'Congratulation {username}, you account have been successfully created.')
             form.save()
             return redirect('book:index')
         
@@ -36,12 +36,14 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
+            messages.success(request, f'Welcome {username}, you have been successfully logged in.')
             return redirect('book:index')
         
 
     return render(request, 'users/login.html')
 
 def logout_view(request):
+    messages.success(request, f'{request.user.username}, you have successully logged out.')
     logout(request)
     return redirect('users:login')
 

@@ -3,6 +3,7 @@ from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
 from book.models import Contact
+from book.models import ELibraryModels
 
 class NewspaperForm(forms.ModelForm):
     class Meta:
@@ -23,3 +24,8 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ['email','subject','message']
+
+class UploadBookForm(forms.ModelForm):
+    class Meta:
+        model = ELibraryModels
+        fields = ('title','pdf')
