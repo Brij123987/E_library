@@ -1,4 +1,4 @@
-{% extends 'book/base_form.html' %}
+{% extends 'book/base.html' %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,43 @@
 <body>
     {% block body %}
 
+    <div class="offset-md-0">
+        <ul class="pagination pagination-lg">
+          <li class="#" aria-current="page">
+            <a class="page-link" href="{% url 'book:index' %}">
+              <b>Newspaper's </b>
+              <img 
+              src="https://cdn.pixabay.com/photo/2015/02/15/09/33/news-636978_1280.jpg" 
+              alt="Newspaper"
+              class="card"
+              height="120px"
+              width="100px"
+              >
+            
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="{% url 'book:magazine' %}">
+            <b>Magazine's</b>
+            <img 
+            src="https://marketplace.canva.com/EAFG6srv-fI/1/0/1131w/canva-white-and-red-clean-minimalist-fashion-magazine-cover-GYbcb8zmyTU.jpg" 
+            alt="Magazine's"
+            class="card"
+            height="120px"
+            width="100px"
+            >
+          </a></li>
+          <li class="page-item"><a class="page-link" href="{% url 'book:comic' %}">
+            <b>Comic's</b>
+            <img 
+            src="https://cdn5.vectorstock.com/i/1000x1000/77/29/comic-book-cover-retro-comics-title-page-template-vector-37777729.jpg" 
+            alt="Comic's"
+            class="card"
+            height="120px"
+            width="100px"
+            >
+          </a></li>
+        </ul>
+      </div>
 
     <h1 style="font-style: italic;font-size: 2rem;">Comic's:</h1>
     {% for comic in comiclist %}

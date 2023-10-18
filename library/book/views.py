@@ -7,9 +7,14 @@ from book.models import Magazine
 from book.models import Comic
 from book.models import ELibraryModels
 from book.forms import NewspaperForm, MagazineForm, ComicForm, ContactForm, UploadBookForm
+import os
 
 
 # Create your views here.
+
+# Function based index view
+# ------------------------------------------------------------------------------------------------
+
 
 def index(request):
     itemlist = Newspaper.objects.all()
@@ -20,6 +25,11 @@ def index(request):
 
     return render(request, 'book/index.html', context)
 
+
+# Function based magazine view
+# ------------------------------------------------------------------------------------------------
+
+
 def magazine(request):
     magazinelist = Magazine.objects.all()
 
@@ -28,6 +38,11 @@ def magazine(request):
     }
 
     return render(request, 'book/magazine.html', context)
+
+
+# Function based comic view
+# ------------------------------------------------------------------------------------------------
+
 
 def comic(request):
     comiclist = Comic.objects.all()
@@ -38,6 +53,11 @@ def comic(request):
 
     return render(request, 'book/comic.html', context)
 
+
+# Function based detail view
+# ------------------------------------------------------------------------------------------------
+
+
 def detail(request, item_id):
     item = Newspaper.objects.get(pk = item_id)
 
@@ -45,6 +65,11 @@ def detail(request, item_id):
         'item':item
     }
     return render (request, 'book/detail.html', context)
+
+
+# Function based detail_m view
+# ------------------------------------------------------------------------------------------------
+
 
 def detail_m(request, magazine_id):
     magazine = Magazine.objects.get(pk = magazine_id)
@@ -55,6 +80,11 @@ def detail_m(request, magazine_id):
 
     return render(request, 'book/detail_m.html', context)
 
+
+# Function based detail_c view
+# ------------------------------------------------------------------------------------------------
+
+
 def detail_c(request, comic_id):
     comic = Comic.objects.get(pk = comic_id)
 
@@ -63,6 +93,10 @@ def detail_c(request, comic_id):
     }
 
     return render(request, 'book/detail_c.html', context)
+
+
+# Function based Create view
+# ------------------------------------------------------------------------------------------------
 
 
 def create_item(request):
@@ -78,6 +112,11 @@ def create_item(request):
 
     return render(request, 'book/item-form.html', context)
 
+
+# Function based Create_magazine view
+# ------------------------------------------------------------------------------------------------
+
+
 def create_magazine(request):
     form_1 = MagazineForm(request.POST or None)
 
@@ -91,6 +130,11 @@ def create_magazine(request):
 
     return render(request, 'book/magazine-form.html', context)
 
+
+# Function based Create_comic view
+# ------------------------------------------------------------------------------------------------
+
+
 def create_comic(request):
     form_2 = ComicForm(request.POST or None)
 
@@ -103,7 +147,11 @@ def create_comic(request):
     }
 
     return render(request, 'book/comic-form.html', context)
+
     
+# Function based Update view
+# ------------------------------------------------------------------------------------------------
+
 
 def update_item(request, item_id):
     item = Newspaper.objects.get(pk = item_id)
@@ -120,6 +168,11 @@ def update_item(request, item_id):
 
     return render(request, 'book/item-form.html', context)
 
+
+# Function based Update_magazine view
+# ------------------------------------------------------------------------------------------------
+
+
 def update_magazine(request, magazine_id):
     magazine = Magazine.objects.get(pk = magazine_id)
     form_1 = MagazineForm(request.POST or None, instance=magazine)
@@ -133,6 +186,11 @@ def update_magazine(request, magazine_id):
     }
 
     return render(request, 'book/magazine-form.html', context)
+
+
+# Function based Update_comic view
+# ------------------------------------------------------------------------------------------------
+
 
 def update_comic(request, comic_id):
     comic = Comic.objects.get(pk = comic_id)
@@ -148,6 +206,12 @@ def update_comic(request, comic_id):
 
     return render(request, 'book/comic-form.html', context)
 
+
+
+# Function based delete view
+# ------------------------------------------------------------------------------------------------
+
+
 def delete_item(request, item_id):
     item = Newspaper.objects.get(pk = item_id)
 
@@ -161,6 +225,10 @@ def delete_item(request, item_id):
     
     return render(request, 'book/delete-item.html', context)
 
+
+# Function based delete_magazine view
+# ------------------------------------------------------------------------------------------------
+
 def delete_magazine(request, magazine_id):
     magazine = Magazine.objects.get(pk = magazine_id)
 
@@ -173,6 +241,11 @@ def delete_magazine(request, magazine_id):
         return redirect('book:magazine')
 
     return render(request, 'book/delete-magazine.html', context)
+
+
+# Function based delete_comic view
+# ------------------------------------------------------------------------------------------------
+
 
 def delete_comic(request, comic_id):
     comic = Comic.objects.get(pk = comic_id)
@@ -188,24 +261,35 @@ def delete_comic(request, comic_id):
     return render(request, 'book/delete-comic.html', context)
 
 
-def contact_view(request):
+# Function based contact view
+# ------------------------------------------------------------------------------------------------
+
+
+def send_email(request):
+    contact_form = ContactForm(request.POST or None)
+
     if request.method == 'POST':
-        contact_1 = ContactForm(request.POST)
-        
-        if contact_1.is_valid():
-            email_subject = f'New contact {contact_1.cleaned_data["email"]}: {contact_1.cleaned_data["subject"]}'
-            email_message = contact_1.cleaned_data['message']
-            contact_1.save()
-            send_mail(email_subject, email_message, settings.CONTACT_EMAIL, settings.ADMIN_EMAIL)
+        if contact_form.is_valid():
+            contact_form.save()
+            subject = 'E-Library: (Feedback Email)'
+            message = f'You have received a new Feedback Email. Details:\n\n{contact_form.cleaned_data}'
+            form_email = settings.EMAIL_HOST_USER
+            recipient_list = ['brijeshyadav9811@gmail.com']
+
+            send_mail(subject, message, form_email, recipient_list, fail_silently=False)
+
             return redirect('book:index')
 
-    else:
-        contact_1 = ContactForm()
-        context = {
-        'contact_1': contact_1
-        }
-        
-    return render(request, 'book/base_form.html', context)
+    context = {
+        'contact_form': contact_form
+    }
+
+    return render(request, 'book/contact_form.html', context)
+
+
+
+# Function based book_upload view
+# ------------------------------------------------------------------------------------------------
 
 
 def BookUploadView(request):
@@ -213,7 +297,7 @@ def BookUploadView(request):
         form_book = UploadBookForm(request.POST, request.FILES)
         if form_book.is_valid():
             form_book.save()
-            return redirect('book:index')
+            return redirect('book:toi')
         
     else:
         form_book = UploadBookForm()
@@ -222,3 +306,15 @@ def BookUploadView(request):
         }
         
     return render(request, 'book/uploadbook.html', context)
+
+
+
+def toi_views(request):
+
+    book_pdf = ELibraryModels.objects.all()
+
+    context = {
+        'book_pdf' : book_pdf
+    }
+
+    return render (request, 'book/times_of_india.html', context)

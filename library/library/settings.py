@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
@@ -128,17 +128,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+import smtplib
+smtplib.DEBUG = True
 
-from dotenv import load_dotenv
-load_dotenv()
-
-
-CONTACT_EMAIL = 'brijeshyadav9811@gmail.com'
-ADMIN_EMAIL = 'brijeshyadav9811@gmail.com'
-
-
-EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_USE_USER = True
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get('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')
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'brijeshyadav9811@gmail.com'
+EMAIL_HOST_PASSWORD = 'kuog ptjg zknm lxvk'
+
+
+
+

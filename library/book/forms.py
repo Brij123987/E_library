@@ -23,7 +23,7 @@ class ComicForm(forms.ModelForm):
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ['email','subject','message']
+        fields = ['email','subject','message']	
 
 class UploadBookForm(forms.ModelForm):
     class Meta:
