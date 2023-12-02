@@ -8,12 +8,40 @@
     <title>Document</title>
 </head>
 <body>
-    {% block body %}
-        
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form }}
-        </form>
-    {% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-4">
+        <div class="card">
+          <div class="card-header text-black">
+            <div class="card-title" style="text-align: center; font-size: 1.5rem; font-style:bold">
+                <i>Upload</i>
+            </div>
+          </div>
+          <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label><b>Title Name: </b></label></td>
+                        <td>{{ form.title_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Upload: </b></label></td>
+                        <td>{{ form.pdf }}</td>
+                    </tr>
+                </table>
+                <button type="submit" class="btn btn-info btn-sm">Save</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% endblock %}
 </body>
 </html>
