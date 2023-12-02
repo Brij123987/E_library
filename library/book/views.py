@@ -9,7 +9,7 @@ from book.models import TimesofIndia, HindustanTime, IndianExpress, IndiaToday
 from book.forms import UploadTimesofIndiaNewspaper,NewspaperForm, MagazineForm, ComicForm, ContactForm
 from book.forms import UploadHindustanNewspaper, UploadIndianExpressNewspaper, UploadIndiaTodayNewspaper
 from addcart.models import CartItem
-from book.forms import UploadComicPdf
+from book.forms import UploadComicPdf, UploadMagazinePdf
 import os
 
 
@@ -445,6 +445,26 @@ def Upload_Comic_Magazine(request, detail_id):
                 }
 
             return render(request,'book/uploadComicMagazine.html',context)
+        
+        elif isinstance(content_object, Magazine):
+            item = Magazine.objects.get(pk = detail_id)
+            if request.method == 'POST':
+                form = UploadMagazinePdf(request.POST, request.FILES)
+
+                if form.is_valid():
+                    form.save()
+                    return redirect('book:magazine')
+            
+            else:
+                form = UploadMagazinePdf()
+
+                context = {
+                    'item':item,
+                    'form':form
+                }
+
+            return render(request,'book/uploadComicMagazine.html',context)
+
 
 
 
