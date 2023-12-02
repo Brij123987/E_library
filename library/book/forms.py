@@ -4,7 +4,7 @@ from book.models import Magazine
 from book.models import Comic
 from book.models import Contact
 from book.models import TimesofIndia,HindustanTime, IndianExpress, IndiaToday
-from book.models import UploadComic
+from book.models import UploadComic, UploadMagazine
 
 class NewspaperForm(forms.ModelForm):
     class Meta:
@@ -49,4 +49,9 @@ class UploadIndiaTodayNewspaper(forms.ModelForm):
 class UploadComicPdf(forms.ModelForm):
     class Meta:
         model = UploadComic
+        fields = ('title_name','pdf')
+
+class UploadMagazinePdf(forms.ModelForm):
+    class Meta:
+        model = UploadMagazine
         fields = ('title_name','pdf')
