@@ -32,9 +32,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
+    'checkout.apps.CheckoutConfig',
+    'addcart.apps.AddcartConfig',
+    'registration.apps.RegistrationConfig',
     'users.apps.UsersConfig',
     'book.apps.BookConfig',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -65,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'book.context_processors.contact_form_context',
             ],
         },
     },
@@ -119,8 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Book_Pdf
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Profile_pictures
+# NEW_MEDIA_URL = 'profile_pic/'
+# NEW_MEDIA_ROOT = os.path.join(BASE_DIR, 'profile_pic')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -139,6 +149,7 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'brijeshyadav9811@gmail.com'
 EMAIL_HOST_PASSWORD = 'kuog ptjg zknm lxvk'
 
-
+NEW_EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / "sent_emails"
 
 

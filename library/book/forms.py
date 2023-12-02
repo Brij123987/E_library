@@ -3,7 +3,8 @@ from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
 from book.models import Contact
-from book.models import ELibraryModels
+from book.models import TimesofIndia,HindustanTime, IndianExpress, IndiaToday
+from book.models import UploadComic
 
 class NewspaperForm(forms.ModelForm):
     class Meta:
@@ -25,7 +26,27 @@ class ContactForm(forms.ModelForm):
         model = Contact
         fields = ['email','subject','message']	
 
-class UploadBookForm(forms.ModelForm):
+class UploadTimesofIndiaNewspaper(forms.ModelForm):
     class Meta:
-        model = ELibraryModels
-        fields = ('title','pdf')
+        model = TimesofIndia
+        fields = ('title','day','month','pdf')
+
+class UploadHindustanNewspaper(forms.ModelForm):
+    class Meta:
+        model = HindustanTime
+        fields = ('title','day','month','pdf')
+
+class UploadIndianExpressNewspaper(forms.ModelForm):
+    class Meta:
+        model = IndianExpress
+        fields = ('title','day','month','pdf')
+
+class UploadIndiaTodayNewspaper(forms.ModelForm):
+    class Meta:
+        model = IndiaToday
+        fields = ('title','day','month','pdf')
+
+class UploadComicPdf(forms.ModelForm):
+    class Meta:
+        model = UploadComic
+        fields = ('title_name','pdf')

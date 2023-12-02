@@ -9,16 +9,57 @@
     <title>Document</title>
 </head>
 <body>
-    {% block body %}
+{% block body %}
+{% if item.id == 1 %}
+    <h3>Times of India</h3>
+{% elif item.id == 2 %}
+    <h3>Hindustan Times</h3>
+{% elif item.id == 3 %}
+    <h3>The Indian Express</h3>
+{% elif item.id == 4 %}
+    <h3>India Today's</h3>
+{% endif %}
 
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-4">
+        <div class="card">
+          <div class="card-header text-black">
+            <div class="card-title" style="text-align: center; font-size: 1.5rem; font-style:bold">
+                <i>Upload Newspaper</i>
+            </div>
+          </div>
+          <div class="card-body">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td><label><b>Select Newspaper: </b></label></td>
+                        <td>{{ form.title }}</td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Date: </b></label></td>
+                        <td>{{ form.day }}</td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Select Month: </b></label></td>
+                        <td>{{ form.month }}</td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Upload Newspaper:</b></label></td>
+                        <td>{{ form.pdf }}</td>
+                    </tr>
+                </table>
+                <button type="submit" class="btn btn-info btn-sm">Save</button>
 
-            {{ form_book }}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 
-            <input type="submit" value="submit">
-        </form>
 
-    {% endblock %}
+{% endblock %}
 </body>
 </html>

@@ -1,0 +1,57 @@
+{% extends 'book/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+    {% if news_id.id == 1 %}
+        <h3>Times of India</h3>
+    {% elif news_id.id == 2 %}
+        <h3>Hindustan Times</h3>
+    {% elif news_id.id == 3 %}
+        <h3>The Indian Express</h3>
+    {% elif news_id.id == 4 %}
+        <h3>India Today's</h3>
+    {% endif %}
+ 
+        
+            {% if news_id.id == 1 %}
+                {% for i in news %}
+                    {{ i.day }} <br>
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                    <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+                {% endfor %}
+
+
+            {% elif news_id.id == 2 %}
+                {% for i in hind %}
+                    {{ i.day }} <br>
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                    <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+                {% endfor %}
+            
+            {% elif news_id.id == 3 %}
+                {% for i in express %}
+                    {{ i.day }} <br>
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                    <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+                {% endfor %}
+            
+            {% elif news_id.id == 4 %}
+                {% for i in today %}
+                    {{ i.day }} <br>
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                    <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+                {% endfor %}
+            
+            {% endif %}
+
+    
+
+{% endblock %}
+</body>
+</html>

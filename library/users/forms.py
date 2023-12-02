@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
+
 class RegisterForm(UserCreationForm):
     email= forms.EmailField()
     first_name= forms.CharField()
@@ -12,4 +13,5 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = [
             'username','email','first_name','last_name','password1','password2'
-        ] 
+        ]
+

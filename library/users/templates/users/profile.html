@@ -1,0 +1,27 @@
+{% extends 'book/base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% block body %}
+
+    <h1>Profile</h1>
+        <span>{{ user.first_name }}</span>
+        <span>{{ user.last_name }}</span><br>
+        <span>{{ user.email }}</span><br>
+        <span><img src="{{ user.profile.image.url }}" alt="profile_pic" height="100px" width="100px"></span><br>
+        <span>{{ user.profile.address }}</span><br>
+        <span>{{ user.profile.phone_no }}</span>
+        <br>
+        <br>
+        <a href="{% url 'users:update' user.profile.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'registration:change_password' %}" class="btn btn-primary">Change Password</a>
+    {% endblock %}
+</body>
+</html>

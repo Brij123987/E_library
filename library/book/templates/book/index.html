@@ -1,7 +1,6 @@
 {% extends 'book/base.html' %}
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,17 +82,14 @@
             <h6
             style="font-style: italic;"
             >
-                added for: {{ item.for_user }}
-            </h6>
-            <h6
-            style="font-style: italic;"
-            >
                 added by superuser:
             </h6>
         </div>
+
+    {% if user.is_authenticated %}
         <div class="col-md-6 offset-md-5 mb-4">
             <a 
-            href="{% url 'book:toi' %}"
+            href="{% url 'book:news' item.id %}"
             style="width: 80px;"
             class="btn btn-primary"
             >
@@ -107,6 +103,25 @@
                 Detail
             </a>
         </div>
+    {% else %}
+    <div class="col-md-6 offset-md-5 mb-4">
+        <a 
+        href="{% url 'users:login' %}"
+        style="width: 80px;"
+        class="btn btn-primary"
+        >
+            Open
+        </a>
+        <a 
+        href="{% url 'users:login' %}"
+        style="width: 80px;"
+        class="btn btn-success"
+        >
+            Detail
+        </a>
+    </div>
+        
+    {% endif %}
     </div>
 
         

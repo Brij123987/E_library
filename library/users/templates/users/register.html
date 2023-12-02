@@ -12,16 +12,69 @@
 <body>
     {% block body %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-
-        {{ form }} <br>
-            
-        <br>
-        <button type="submit">
-            Sign Up
-        </button>
-    </form>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card">
+              <div class="card-header text-white bg-info">
+                <div class="card-title" style="text-align: center; font-size:larger; font-style:italic">
+                  Register
+                </div>
+              </div>
+              <div class="card-body">
+                <form method="POST">
+                  {% csrf_token %}
+                  <table>
+                    <tr>
+                      <td><label for="username"><b>Username: </b></label></td>
+                      <td>{{ form.username }}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="color: grey; font-size: small;text-align:right;">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</td>
+                    </tr>
+                    <tr>
+                      <td><label for="email"><b>Email:</b></label></td>
+                      <td>{{ form.email }}</td>
+                    </tr>
+                    <tr>
+                      <td><label for="firstname"><b>First Name:</b></label></td>
+                      <td>{{ form.first_name }}</td>
+                    </tr>
+                    <tr>
+                      <td><label for="lastname"><b>Last Name:</b></label></td>
+                      <td>{{ form.last_name }}</td>
+                    </tr>
+                    <tr>
+                      <td><label for="pass1"><b>Password:</b></label></td>
+                      <td>{{ form.password1 }}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        <ul style="color: grey; font-size: small;">
+                          <li>Your password can’t be too similar to your other personal information.</li>
+                          <li>Your password must contain at least 8 characters.</li>
+                          <li>Your password can’t be a commonly used password.</li>
+                          <li>Your password can’t be entirely numeric.</li>
+                        </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td><label for="pass2"><b>Confirm Password:</b></label></td>
+                      <td>{{ form.password2 }}</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="color: gray;font-size: small;">Enter the same password as before, for verification.</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><button type="submit" class="btn btn-success">Sign Up</button></td>
+                    </tr>
+                </table>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
 
     {% endblock %}
 </body>

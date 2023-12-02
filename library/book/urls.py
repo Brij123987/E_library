@@ -45,12 +45,12 @@ urlpatterns = [
 
 
     # Function based Create_m view
-# ------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------
     path('add_m/',views.create_magazine, name='create_magazine'),
 
 
     # Function based create_c view
-# ------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------
     path('add_c/',views.create_comic, name="create_comic"),
 
 
@@ -91,8 +91,13 @@ urlpatterns = [
 
     # Function based bookupload view
     # ------------------------------------------------------------------------------------------------
-    path('upload/', views.BookUploadView, name='bookupload'),
+    path('upload/<int:detail_id>/', views.BookUploadView, name='bookupload'),
 
 
-    path('toi/',views.toi_views, name='toi'),
+    path('newspaper/<int:item_id>/',views.news_views, name='news'),
+
+    path('news_delete/<int:news_id>/<int:delete_id>/',views.delete_news, name='delete_news'),
+
+    path('upload_comic_magazine/<int:detail_id>/',views.Upload_Comic_Magazine, name='UploadComicMagazine'),
+
 ]

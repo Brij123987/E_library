@@ -5,8 +5,11 @@ from django.http import HttpResponse
 from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
-from book.models import ELibraryModels
-from book.forms import NewspaperForm, MagazineForm, ComicForm, ContactForm, UploadBookForm
+from book.models import TimesofIndia, HindustanTime, IndianExpress, IndiaToday
+from book.forms import UploadTimesofIndiaNewspaper,NewspaperForm, MagazineForm, ComicForm, ContactForm
+from book.forms import UploadHindustanNewspaper, UploadIndianExpressNewspaper, UploadIndiaTodayNewspaper
+from addcart.models import CartItem
+from book.forms import UploadComicPdf
 import os
 
 
@@ -292,29 +295,160 @@ def send_email(request):
 # ------------------------------------------------------------------------------------------------
 
 
-def BookUploadView(request):
+def BookUploadView(request, detail_id):
+    item = Newspaper.objects.get(pk=detail_id)
     if request.method == 'POST':
-        form_book = UploadBookForm(request.POST, request.FILES)
-        if form_book.is_valid():
-            form_book.save()
-            return redirect('book:toi')
+        if item.id == 1:
+            form = UploadTimesofIndiaNewspaper(request.POST, request.FILES)
+
+            if form.is_valid():
+                form.save()
+            return redirect('book:index')
         
+        elif item.id == 2:
+            form = UploadHindustanNewspaper(request.POST, request.FILES)
+
+            if form.is_valid():
+                form.save()
+            return redirect('book:index')
+        
+        elif item.id == 3:
+            form = UploadIndianExpressNewspaper(request.POST, request.FILES)
+
+            if form.is_valid():
+                form.save()
+            return redirect('book:index')
+        
+        elif item.id == 4:
+            form = UploadIndiaTodayNewspaper(request.POST, request.FILES)
+
+            if form.is_valid():
+                form.save()
+            return redirect('book:index')
+    
+
     else:
-        form_book = UploadBookForm()
+        if item.id == 1:
+            form = UploadTimesofIndiaNewspaper()
+        elif item.id == 2:
+            form = UploadHindustanNewspaper()
+        elif item.id == 3:
+            form = UploadIndianExpressNewspaper()
+        elif item.id == 4:
+            form = UploadIndiaTodayNewspaper()
+
         context = {
-            'form_book':form_book
+            'form':form,
+            'item': item
         }
-        
+
     return render(request, 'book/uploadbook.html', context)
 
 
 
-def toi_views(request):
-
-    book_pdf = ELibraryModels.objects.all()
+def news_views(request, item_id):
+    news = TimesofIndia.objects.all()
+    hind = HindustanTime.objects.all()
+    express = IndianExpress.objects.all()
+    today = IndiaToday.objects.all()
+    news_id = Newspaper.objects.get(pk=item_id)
 
     context = {
-        'book_pdf' : book_pdf
+        'news': news,
+        'hind': hind,
+        'express': express,
+        'today': today,
+        'news_id': news_id
     }
 
-    return render (request, 'book/times_of_india.html', context)
+    return render (request, 'book/news.html', context)
+
+
+def delete_news(request,news_id,delete_id):
+    news = Newspaper.objects.get(pk = news_id)
+    if news.id == 1:
+        news_delete = TimesofIndia.objects.get(pk=delete_id)
+
+        context = {
+            'news_delete':news_delete,
+            'news':news
+        }
+
+        if request.method == 'POST':
+            news_delete.delete()
+            return redirect('book:index')
+        
+        return render(request, 'book/delete_news.html', context)
+
+    elif news.id == 2:
+        hind_delete = HindustanTime.objects.get(pk=delete_id)
+
+        context = {
+            'hind_delete':hind_delete,
+            'news':news
+        } 
+
+        if request.method == 'POST':
+            hind_delete.delete()
+            return redirect('book:index')
+
+        return render(request, 'book/delete_news.html', context)
+    
+    elif news.id == 3:
+        express_delete = IndianExpress.objects.get(pk=delete_id)
+
+        context = {
+            'express_delete':express_delete,
+            'news':news
+        }
+
+        if request.method == 'POST':
+            express_delete.delete()
+            return redirect('book:index')
+        
+        return render(request,'book/delete_news.html',context)
+    
+    elif news.id == 4:
+        today_delete = IndiaToday.objects.get(pk = delete_id)
+
+        context = {
+            'today_delete':today_delete,
+            'news':news
+        }
+
+        if request.method == 'POST':
+            today_delete.delete()
+            return redirect('book:index')
+        
+        return render(request,'book/delete_news.html',context)
+    
+def Upload_Comic_Magazine(request, detail_id):
+    cartitem = CartItem.objects.all()
+    for cart_item in cartitem:
+        content_object = cart_item.content_object
+
+        if isinstance(content_object, Comic):
+            item = Comic.objects.get(pk = detail_id)
+            if request.method == 'POST':
+                form = UploadComicPdf(request.POST, request.FILES)
+
+                if form.is_valid():
+                    form.save()
+                    return redirect('book:comic')
+            
+            else:
+                form = UploadComicPdf()
+
+                context = {
+                    'item':item,
+                    'form':form
+                }
+
+            return render(request,'book/uploadComicMagazine.html',context)
+
+
+
+
+
+
+

@@ -79,24 +79,20 @@
             <h6
             style="font-style: italic;"
             >
-                added for: {{ magazine.for_user }}
-            </h6>
-            <h6
-            style="font-style: italic;"
-            >
                 added by superuser:
             </h6>
         </div>
+    {% if user.is_authenticated %}
         <div class="col-md-6 offset-md-5 mb-4">
             <a 
-            href="" download
+            href="#" download
             style="width: 80px;"
             class="btn btn-primary"
             >
                 Open
             </a>
             <a 
-            href="#"
+            href="{% url 'addcart:add_magazine_to_cart' magazine_id=magazine.id %}"
             style="width: 150px;"
             class="btn btn-warning"
             >
@@ -117,6 +113,38 @@
                 Detail
             </a>
         </div>
+    {% else %}
+    <div class="col-md-6 offset-md-5 mb-4">
+        <a 
+        href="{% url 'users:login' %}"
+        style="width: 80px;"
+        class="btn btn-primary"
+        >
+            Open
+        </a>
+        <a 
+        href="{% url 'users:login' %}"
+        style="width: 150px;"
+        class="btn btn-warning"
+        >
+            Add to Cart
+        </a>
+        <a 
+        href="{% url 'users:login' %}"
+        style="width: 80px;"
+        class="btn btn-info"
+        >
+            Buy
+        </a>
+        <a 
+        href="{% url 'users:login' %}"
+        style="width: 80px;"
+        class="btn btn-success"
+        >
+            Detail
+        </a>
+    </div>
+    {% endif %}
 
     </div>
 

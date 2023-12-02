@@ -41,6 +41,7 @@
             </h5>
 
         </div>
+    {% if user.is_authenticated and user.profile.user_type == 'Admin' %}
         <div class="col-md-3 offset-md-1">
 
             <a 
@@ -68,6 +69,30 @@
             </a>
     
         </div>
+        <div>
+            <a 
+            href="{% url 'book:UploadComicMagazine' comic.id %}"
+            style="width: 80px"
+            class="btn btn-primary"
+            >
+            Upload
+            </a>
+        </div>
+
+    {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+
+        <div class="col-md-3 offset-md-1">
+
+            <a 
+            href="{% url 'book:comic' %}"
+            style="width: 80px"
+            class="btn btn-success"
+            >
+            Back
+            </a>
+
+        </div>
+    {% endif %}
     </div>
 
     {% endblock %}

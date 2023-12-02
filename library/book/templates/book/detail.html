@@ -41,7 +41,9 @@
             </h5>
 
         </div>
-        <div class="col-md-3 offset-md-1">
+
+    {% if user.is_authenticated and user.profile.user_type == 'Admin' %}
+        <div class="col-md-4 offset-md-1">
 
             <a 
             href="{% url 'book:update_item' item.id %}"
@@ -66,8 +68,31 @@
             >
             Back
             </a>
+
+            <a 
+            href="{% url 'book:bookupload' item.id %}"
+            style="width: 80px"
+            class="btn btn-primary"
+            >
+            Upload
+            </a>
+
     
         </div>
+
+    {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+    <div class="col-md-3 offset-md-1">
+
+        <a 
+        href="{% url 'book:index' %}"
+        style="width: 80px"
+        class="btn btn-success"
+        >
+        Back
+        </a>
+
+    </div>
+    {% endif %}
     </div>
     
     {% endblock %}

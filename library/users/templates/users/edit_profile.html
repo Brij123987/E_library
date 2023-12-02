@@ -1,0 +1,51 @@
+{% extends 'book/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+    <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+            <div class="card">
+              <div class="card-header text-white bg-info">
+                <div class="card-title" style="text-align: center; font-size: larger; font-style: italic;">
+                  Edit Profile
+                </div>
+              </div>
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                      <tr>
+                        <td><label for="username"><b>Profile Picture: </b></label></td>
+                        <td>{{ form.image }}</td>
+                      </tr>
+                      <tr>
+                        <td><label for="email"><b>Address:</b></label></td>
+                        <td>{{ form.address }}</td>
+                      </tr>
+                      <tr>
+                        <td><label for="firstname"><b>Phone Number:</b></label></td>
+                        <td>{{ form.phone_no }}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="2"><button type="submit" class="btn btn-success">Save Change</button></td>
+                      </tr>
+                  </table>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>
