@@ -275,3 +275,11 @@ class UploadComic(models.Model):
 
     def __str__(self):
         return self.comic_name
+
+class UploadMagazine(models.Model):
+    magazine_name = models.ForeignKey(Magazine, on_delete=models.CASCADE)
+    title_name = models.CharField(max_length=100)
+    pdf = models.FileField(upload_to='magazine_pdf')
+
+    def __str__(self):
+        return self.magazine_name
