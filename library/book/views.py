@@ -422,6 +422,9 @@ def delete_news(request,news_id,delete_id):
         
         return render(request,'book/delete_news.html',context)
     
+
+
+    
 def Upload_Comic_Magazine(request, detail_id):
     cartitem = CartItem.objects.all()
     for cart_item in cartitem:
