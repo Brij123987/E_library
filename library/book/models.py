@@ -269,7 +269,7 @@ class IndiaToday(models.Model):
         
 
 class UploadComic(models.Model):
-    comic_name = models.ForeignKey(Comic, on_delete=models.CASCADE)
+    comic_id = models.ForeignKey(Comic, on_delete=models.CASCADE)
     title_name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='comic_pdf')
 
@@ -277,7 +277,7 @@ class UploadComic(models.Model):
         return self.comic_name
 
 class UploadMagazine(models.Model):
-    magazine_name = models.ForeignKey(Magazine, on_delete=models.CASCADE)
+    magazine_id = models.ForeignKey(Magazine, on_delete=models.CASCADE)
     title_name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='magazine_pdf')
 

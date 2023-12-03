@@ -433,6 +433,7 @@ def Upload_Comic_Magazine(request, detail_id):
                 form = UploadComicPdf(request.POST, request.FILES)
 
                 if form.is_valid():
+                    form.instance.comic_id = item
                     form.save()
                     return redirect('book:comic')
             
@@ -452,6 +453,7 @@ def Upload_Comic_Magazine(request, detail_id):
                 form = UploadMagazinePdf(request.POST, request.FILES)
 
                 if form.is_valid():
+                    form.instance.magazine_id = item
                     form.save()
                     return redirect('book:magazine')
             
