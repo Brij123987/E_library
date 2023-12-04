@@ -98,6 +98,8 @@ urlpatterns = [
 
     path('news_delete/<int:news_id>/<int:delete_id>/',views.delete_news, name='delete_news'),
 
-    path('upload_comic_magazine/<int:detail_id>/',views.Upload_Comic_Magazine, name='UploadComicMagazine'),
+    path('upload_comic/<int:detail_id>/',views.upload_comic, name='uploadcomic'),
+
+    path('upload_magazine/<int:detail_id>/',views.upload_magazine, name='uploadmagazine'),
 
 ]

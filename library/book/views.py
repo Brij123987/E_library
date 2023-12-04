@@ -424,56 +424,43 @@ def delete_news(request,news_id,delete_id):
     
 
 
+def upload_comic(request, detail_id):
+    item = Comic.objects.get(pk = detail_id)
+
+    if request.method == 'POST':
+        form = UploadComicPdf(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('book:comic')
+
+    else:
+        form = UploadComicPdf()
+
+        context = {
+            'form':form,
+            'item':item
+        }
     
-def Upload_Comic_Magazine(request, detail_id):
-    cartitem = CartItem.objects.all()
-    for cart_item in cartitem:
-        content_object = cart_item.content_object
-
-        if isinstance(content_object, Comic):
-            item = Comic.objects.get(pk = detail_id)
-            if request.method == 'POST':
-                form = UploadComicPdf(request.POST, request.FILES)
-
-                if form.is_valid():
-                    form.instance.comic_id = item
-                    form.save()
-                    return redirect('book:comic')
-            
-            else:
-                form = UploadComicPdf()
-
-                context = {
-                    'item':item,
-                    'form':form
-                }
-
-            return render(request,'book/uploadComicMagazine.html',context)
-        
-        elif isinstance(content_object, Magazine):
-            item = Magazine.objects.get(pk = detail_id)
-            if request.method == 'POST':
-                form = UploadMagazinePdf(request.POST, request.FILES)
-
-                if form.is_valid():
-                    form.instance.magazine_id = item
-                    form.save()
-                    return redirect('book:magazine')
-            
-            else:
-                form = UploadMagazinePdf()
-
-                context = {
-                    'item':item,
-                    'form':form
-                }
-
-            return render(request,'book/uploadComicMagazine.html',context)
+    return render(request,'book/uploadComicMagazine.html',context)
 
 
+def upload_magazine(request, detail_id):
+    item = Magazine.objects.get(pk = detail_id)
 
+    if request.method == 'POST':
+        form = UploadMagazinePdf(request.POST, request.FILES)
 
+        if form.is_valid():
+            form.save()
+            return redirect('book:magazine')
 
+    else:
+        form = UploadMagazinePdf()
 
-
-
+        context = {
+            'form':form,
+            'item':item
+        }
+    
+    return render(request,'book/uploadComicMagazine.html',context)

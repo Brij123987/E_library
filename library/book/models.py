@@ -269,17 +269,15 @@ class IndiaToday(models.Model):
         
 
 class UploadComic(models.Model):
-    comic_id = models.ForeignKey(Comic, on_delete=models.CASCADE)
     title_name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='comic_pdf')
 
     def __str__(self):
-        return self.comic_name
+        return self.title_name
 
 class UploadMagazine(models.Model):
-    magazine_id = models.ForeignKey(Magazine, on_delete=models.CASCADE)
     title_name = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='magazine_pdf')
 
     def __str__(self):
-        return self.magazine_name
+        return self.title_name

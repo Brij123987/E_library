@@ -3,7 +3,7 @@ from book.models import Newspaper
 from book.models import Comic
 from book.models import Magazine
 from book.models import Contact
-from book.models import TimesofIndia,HindustanTime, IndianExpress, IndiaToday
+from book.models import TimesofIndia,HindustanTime, IndianExpress, IndiaToday, UploadComic, UploadMagazine
 
 
 # Register your models here.
@@ -16,3 +16,5 @@ admin.site.register(TimesofIndia)
 admin.site.register(HindustanTime)
 admin.site.register(IndianExpress)
 admin.site.register(IndiaToday)
+admin.site.register(UploadComic)
+admin.site.register(UploadMagazine)
