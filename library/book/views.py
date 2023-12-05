@@ -272,6 +272,7 @@ def send_email(request):
     contact_form = ContactForm(request.POST or None)
 
     if request.method == 'POST':
+        path = request.POST.get('item_name')
         if contact_form.is_valid():
             contact_form.save()
             subject = 'E-Library: (Feedback Email)'
@@ -281,7 +282,7 @@ def send_email(request):
 
             send_mail(subject, message, form_email, recipient_list, fail_silently=False)
 
-            return redirect('book:index')
+            return redirect(str(path))
 
     context = {
         'contact_form': contact_form
@@ -464,3 +465,4 @@ def upload_magazine(request, detail_id):
         }
     
     return render(request,'book/uploadComicMagazine.html',context)
+
