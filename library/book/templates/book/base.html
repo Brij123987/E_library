@@ -56,7 +56,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown" style="justify-content: right;">
-      <form action="{% url 'book:search' %}" method="GET">
+      <form action='' method="GET">
         {% csrf_token %}
 
         <input type="search" name="item_name">

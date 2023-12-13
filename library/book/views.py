@@ -10,6 +10,7 @@ from book.forms import UploadTimesofIndiaNewspaper,NewspaperForm, MagazineForm, 
 from book.forms import UploadHindustanNewspaper, UploadIndianExpressNewspaper, UploadIndiaTodayNewspaper
 from addcart.models import CartItem
 from book.forms import UploadComicPdf, UploadMagazinePdf
+from book.models import UploadComic, UploadMagazine
 import os
 
 

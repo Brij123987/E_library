@@ -22,30 +22,50 @@
             {% if news_id.id == 1 %}
                 {% for i in news %}
                     {{ i.day }} <br>
+                {% if user.is_authenticated and user.profile.user_type == 'Admin' %}
                     <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
                     <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+
+                {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                {% endif %}
                 {% endfor %}
 
 
             {% elif news_id.id == 2 %}
                 {% for i in hind %}
                     {{ i.day }} <br>
+                {% if user.is_authenticated and user.profile.user_type == 'Admin' %}
                     <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
                     <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+
+                {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                {% endif %}
                 {% endfor %}
             
             {% elif news_id.id == 3 %}
                 {% for i in express %}
                     {{ i.day }} <br>
+                {% if user.is_authenticated and user.profile.user_type == 'Admin' %}
                     <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
                     <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+
+                {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                {% endif %}
                 {% endfor %}
             
             {% elif news_id.id == 4 %}
                 {% for i in today %}
                     {{ i.day }} <br>
+                {% if user.is_authenticated and user.profile.user_type == 'Admin' %}
                     <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
                     <a href="{% url 'book:delete_news' news_id.id i.id %}" class="btn btn-danger btn-sm">Delete</a><br>
+
+                {% elif user.is_authenticated and user.profile.user_type == 'Cust' %}
+                    <a href="{{ i.pdf.url }}" target="_blank" class="btn btn-info btn-sm">Click to View</a>
+                {% endif %}
                 {% endfor %}
             
             {% endif %}
