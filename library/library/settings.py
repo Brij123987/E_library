@@ -124,6 +124,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Use to redirect to the Login page associated with the login_required decoraters
+LOGIN_URL = 'users:login'
+
 # Book_Pdf
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
