@@ -96,9 +96,14 @@ def view_cart(request):
         total_price += i
 
 
+    item_data = list(zip_longest(item_images, item_names, item_prices, item_id, item_content_type, fillvalue=None))
+    request.session['item_data'] = item_data
+
+    request.session['total_price'] = total_price
+    
     context = {
         'cart_items': cart_items,
-        'item_data': zip_longest(item_images, item_names, item_prices, item_id, item_content_type, fillvalue=None),
+        'item_data': item_data,
         'cartitem': cartitem,
         'content_type':content_type,
         'total_price':total_price,

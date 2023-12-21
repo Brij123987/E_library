@@ -16,14 +16,13 @@
 			<div class="row">
 				<div class="col-md-6 col-sm-6 text-left">
 					<h4><strong>Customer</strong> Details</h4>
-                    {% for chk in check %}
 					<ul class="list-unstyled">
-						<li><strong>First Name:</strong>{{ chk.name }}</li>
-						<li><strong>Address: </strong> {{ chk.address }} </li>
-                        <li><strong>Pin Code: </strong>{{ chk.pin_code }}</li>
-						<li><strong>Contact Number: </strong> {{ chk.contact_number }} </li>
-                        <li><strong>Email: </strong>{{ chk.uesr.email }}</li>
-                    {% endfor %}
+						<li><strong>First Name:</strong>{{ name }}</li>
+						<li><strong>Address: </strong> {{ address }} </li>
+                        <li><strong>Pin Code: </strong>{{ pin }}</li>
+						<li><strong>Contact Number: </strong> {{ contact }} </li>
+						<li><strong>Email: </strong>{{ profile }}</li>
+						<li><strong>Order Id: </strong>{{ order_id }}</li>
 					</ul>
 				</div>
 
@@ -40,16 +39,16 @@
 						</tr>
 					</thead>
 					<tbody>
+					{% for val in item_data %}
 						<tr>
-                        {% for item_name, item_price, item_id, item_content_type in check_data %}
 							<td>
-								<div><strong>{{ item_name }}</strong></div>
+								<div><strong>{{ val.1 }}</strong></div>
 							</td>
 							<td>1</td>
-							<td>{{ item_price }}</td>
-                        {% endfor %}
-							<td>{{ total_price }}</td>
+							<td> ₹{{ val.2 }}</td>
+							<td> ₹{{ val.2 }}</td>
 						</tr>
+					{% endfor %}
                         
 					</tbody>
 				</table>
@@ -63,21 +62,20 @@
 					</p><br><!-- no P margin for printing - use <br> instead -->
 
 					<address>
-						PO Box 21132 <br>
-						Vivas 2355 Australia<br>
+						Sai Krupa, Rahiwasi Sangh, <br>
+						Bandra (East), <br>
+						Mumbai 400051, India.<br>
 						Phone: +91 9867839043 <br>
-						Email:brijeshyadav9811@gmail.com
+						Email: brijeshyadav9811@gmail.com
 					</address>
+					<a class="btn btn-dark" href="{% url 'checkout:check' %}">Back</a>
 				</div>
 
 				<div class="col-sm-6 text-right">
 					<ul class="list-unstyled">
-						<li><strong>Sub - Total Amount:</strong> $2162.00</li>
-						<li><strong>Discount:</strong> 10.0%</li>
-						<li><strong>VAT ($6):</strong> $12.0</li>
-						<li><strong>Grand Total:</strong> $1958.0</li>
+						<li><strong>Grand Total:   </strong><b style="font-size: larger;"> ₹ {{ total_price }}</b></li>
 					</ul>     
-					<a class="btn btn-default" href="#">MAKE A PAYMENT</a>
+					<a class="btn btn-dark" href="#">MAKE A PAYMENT</a>
 				</div>
 			</div>
 		</div>

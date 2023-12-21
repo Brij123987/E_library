@@ -27,9 +27,9 @@
             <tr>
                 <td width="10%"><img src="{{ item_image }}" alt="" height="100px" width="100px"></td>
                 <td width="30%"><b>{{ item_name }}</b></td>
-                <td style="text-align: center;">Rs.<b>{{ item_price }}</b></td>
+                <td style="text-align: center;"> ₹<b>{{ item_price }}</b></td>
                 <td width="20%" style="text-align: center;"><b>1</b></td>
-                <td style="text-align: center;">Rs.<b>{{ item_price }}</b></td>
+                <td style="text-align: center;"> ₹<b>{{ item_price }}</b></td>
                 
              
             {% if item_content_type == "comic" %}
@@ -54,7 +54,7 @@
             <tr>
                 <td colspan="3"></td>
                 <td style="text-align: center; font-size: x-large;"><b>Total Price: </b></td>
-                <td style="text-align: center; font-size: x-large;"><b>Rs.{{ total_price }}</b></td>
+                <td style="text-align: center; font-size: x-large;"><b> ₹{{ total_price }}</b></td>
             </tr>
 
         </table>
