@@ -11,7 +11,6 @@ random_number = random.randint(10000,99999)
 
 class Checkout_Detail(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    cartitem = models.ForeignKey(CartItem , on_delete=models.CASCADE)
     order_id =  models.CharField(default=random_number, unique= True, max_length=99999)
     name =  models.CharField(max_length = 100)
     contact_number = models.IntegerField()

@@ -10,7 +10,8 @@
 <body>
 {% block body %}
 
-<form>
+<form method="POST" action="">
+  {% csrf_token %}
     <div class="form-row">
       <div class="form-group col-md-8">
         <label for="inputEmail4">Full Name: </label>
