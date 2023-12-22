@@ -6,15 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 {% block body %}
 
-<form method="POST" action="">
-  {% csrf_token %}
+<div class="container mt-5">
+
+  <h3>Customer Details:</h3>
+
+  <form method="POST" action="">
+    {% csrf_token %}
     <div class="form-row">
       <div class="form-group col-md-8">
-        <label for="inputEmail4">Full Name: </label>
+        <label for="inputEmail4">Full Name:</label>
         {{ check_form.name }}
       </div>
       <div class="form-group col-md-6">
@@ -22,19 +28,30 @@
         {{ check_form.contact_number }}
       </div>
     </div>
-    <div class="form-group col-md-4" >
-      <label for="inputAddress">Address</label>
+    <div class="form-group">
+      <label for="inputAddress">Address:</label>
       {{ check_form.address }}
     </div>
-      <div class="form-group col-md-4">
-        <label for="inputZip">Zip Code</label>
-        {{ check_form.pin_code }}
+    <div class="form-group">
+      <label for="inputZip">Zip Code:</label>
+      {{ check_form.pin_code  }}
+    </div>
+    <div class="form-row">
+      <div class="col-md-6">
+        <a href="{% url 'addcart:view_cart' %}" class="btn btn-dark">Back</a>
+      </div>
+      <div class="col-md-6 text-right">
+        <button type="submit" class="btn btn-primary">Confirm</button>
       </div>
     </div>
-    <a href="{% url 'addcart:view_cart' %}" class="btn btn-dark">Back</a>
-    <button type="submit" class="btn btn-primary">Confrim</button>
   </form>
 
+</div>
+
+<!-- Bootstrap JS CDN (Optional, include it if you need Bootstrap JavaScript features) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% endblock %}
 </body>
 </html>
