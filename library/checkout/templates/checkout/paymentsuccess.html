@@ -1,0 +1,117 @@
+{% extends 'book/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% block body %}
+
+<div class="container bootstrap snippets bootdey" id="print_page">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6 col-sm-6 text-left">
+                    <h4><strong>Your Payment is Successful, <br> Invoice</strong></h4>
+                    <br>
+                    <a class="btn btn-success" onclick="window.print();" target="_blank"><i class="fa fa-print"></i> PRINT INVOICE</a>
+                    <br>
+					<h4><strong>Customer</strong> Details</h4>
+					<ul class="list-unstyled">
+						<li><strong>First Name:</strong>{{ name }}</li>
+						<li><strong>Address: </strong> {{ address }} </li>
+                        <li><strong>Pin Code: </strong>{{ pin }}</li>
+						<li><strong>Contact Number: </strong> {{ contact }} </li>
+						<li><strong>Email: </strong>{{ profile }}</li>
+						<li><strong>Order Id: </strong>{{ order_id }}</li>
+					</ul>
+				</div>
+
+				<div class="col-md-6 col-sm-6 text-right">
+					<h4><strong>Date</strong> Details</h4>
+					<ul class="list-unstyled">
+						<li><strong>Date:</strong> {{ today }} </li>
+                        <li><strong>Time: </strong> {{ time }} </li>
+					</ul>
+
+				</div>
+
+			</div>
+
+			<div class="table-responsive">
+				<table class="table table-condensed nomargin">
+					<thead>
+						<tr>
+							<th>Item Name</th>
+							<th>Quantity</th>
+							<th>Unit Price</th>
+							<th>Total Price</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for val in item_data %}
+						<tr>
+							<td>
+								<div><strong>{{ val.1 }}</strong></div>
+							</td>
+							<td>1</td>
+							<td> ₹{{ val.2 }}</td>
+							<td> ₹{{ val.2 }}</td>
+						</tr>
+					{% endfor %}
+                        
+					</tbody>
+				</table>
+			</div>
+
+			<hr class="nomargin-top">
+			<div class="row">
+				<div class="col-sm-6 text-left">
+					<h4><strong>Contact</strong> Details</h4>
+					<p class="nomargin nopadding">
+					</p><br><!-- no P margin for printing - use <br> instead -->
+
+					<address>
+						Sai Krupa, Rahiwasi Sangh, <br>
+						Bandra (East), <br>
+						Mumbai 400051, India.<br>
+						Phone: +91 9867839043 <br>
+						Email: brijeshyadav9811@gmail.com
+					</address>
+				</div>
+
+				<div class="col-sm-6 text-right">
+					<ul class="list-unstyled">
+						<li><strong>Grand Total:   </strong><b style="font-size: larger;"> ₹ {{ total_price }}</b></li>
+					</ul>     
+				</div>
+
+                <div class="panel panel-default text-right">
+                    <div class="panel-body">
+                        <a class="btn btn-primary" href="{% url 'book:index' %}"> Back</a>
+                        <a class="btn btn-success" onclick="window.print();" target="_blank"> PRINT INVOICE</a>
+                    </div>
+                </div>
+            </div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<script>
+		function printDiv(print_page) {
+		var printContents = document.getElementById(print_page).innerHTML;
+		var originalContents = document.body.innerHTML;
+
+		document.body.innerHTML = printContents;
+		window.print();
+		document.body.innerHTML = originalContents;
+		}
+	</script>
+
+{% endblock %}
+</body>
+</html>

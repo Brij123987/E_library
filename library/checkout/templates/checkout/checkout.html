@@ -22,8 +22,17 @@
                         <li><strong>Pin Code: </strong>{{ pin }}</li>
 						<li><strong>Contact Number: </strong> {{ contact }} </li>
 						<li><strong>Email: </strong>{{ profile }}</li>
-						<li><strong>Order Id: </strong>{{ order_id }}</li>
+						<li><strong>Order Id: </strong> #{{ order_id }}</li>
 					</ul>
+				</div>
+
+                <div class="col-md-6 col-sm-6 text-right">
+					<h4><strong>Date</strong> Details</h4>
+					<ul class="list-unstyled">
+						<li><strong>Date:</strong> {{ today }} </li>
+                        <li><strong>Time: </strong> {{ time }} </li>
+					</ul>
+
 				</div>
 
 			</div>
@@ -73,15 +82,94 @@
 
 				<div class="col-sm-6 text-right">
 					<ul class="list-unstyled">
-						<li><strong>Grand Total:   </strong><b style="font-size: larger;"> ₹ {{ total_price }}</b></li>
+						<li style="font-size: xx-large; font-style: italic; text-align: center;"><strong>Grand Total:   </strong> ₹ {{ total_price }}</li>
 					</ul>     
-					<a class="btn btn-dark" href="#">MAKE A PAYMENT</a>
+					<div id="paypal-button-container">
+
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 </div>
+
+
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var totalamt = "{{ total_price }}";
+    var url = "{% url 'checkout:on_approve' %}";
+    var csrftoken = getCookie('csrftoken');
+    var redirect_url = "{% url 'checkout:paymentsuccess' %}";
+
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        style: {
+            color:  'blue',
+            shape:  'pill',
+            label:  'pay',
+            height: 40,
+        },
+
+        // Call your server to set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: totalamt
+                    }
+                }]
+            });
+        },
+
+        // Call your server to finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                console.log(details);
+                SendData();
+                //alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                function SendData() {
+                    // url : gives the path to where our data goes
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json",
+                            "X-CSRFToken": csrftoken,
+                        },
+                        body: JSON.stringify({
+                            orderID: 10,
+                            transID: details.id,
+                            payment_method: 'Test',
+                            status: details.status,
+                        }),
+                    })
+                    .then((response) => response.json())
+                    //.then(data => console.log(data));
+                    .then((data) => {
+                        window.location.href = redirect_url;
+                    });
+                }
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
 
 {% endblock %}
 </body>
