@@ -4,13 +4,13 @@ from addcart.models import CartItem
 from users.models import Profile
 import random
 
-random_number = random.randint(10000,99999)
+random_number = random.randint(10000,9999999)
 
 
 # Create your models here.
 
 class Checkout_Detail(models.Model):
-    order_id =  models.CharField(default=random_number, unique= True, max_length=99999)
+    order_id =  models.CharField(default=random_number, unique= False, max_length=99999)
     name =  models.CharField(max_length = 100)
     contact_number = models.IntegerField()
     address = models.CharField(max_length=150)

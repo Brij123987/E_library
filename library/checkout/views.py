@@ -39,6 +39,7 @@ def payment_page(request):
         contact = val.contact_number
         pin = val.pin_code
         order_id = val.order_id
+        print(order_id)
     profile = request.user.email
     item_data = request.session.get('item_data', [])
 

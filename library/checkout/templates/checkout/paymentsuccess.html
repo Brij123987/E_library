@@ -1,14 +1,16 @@
-{% extends 'book/base.html' %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-{% block body %}
+
 
 <div class="container bootstrap snippets bootdey" id="print_page">
 	<div class="panel panel-default">
@@ -106,12 +108,12 @@
 		var printContents = document.getElementById(print_page).innerHTML;
 		var originalContents = document.body.innerHTML;
 
-		document.body.innerHTML = printContents;
+		document.printDiv(print_page).innerHTML = printContents;
 		window.print();
-		document.body.innerHTML = originalContents;
+		document.printDiv(print_page).innerHTML = originalContents;
 		}
 	</script>
 
-{% endblock %}
+
 </body>
 </html>
