@@ -34,10 +34,12 @@ def index(request):
 
 def magazine(request):
     magazinelist = Magazine.objects.all()
-    
+    for mag in magazinelist:
+        print(mag.pdf_file)
+
 
     context = {
-        'magazinelist':magazinelist
+        'magazinelist':magazinelist,
     }
 
     return render(request, 'book/magazine.html', context)

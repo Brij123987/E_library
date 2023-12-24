@@ -48,6 +48,7 @@
       </div>
 
     <h1 style="font-style: italic; font-size: 2rem;">Magazine's:</h1>
+
     {% for magazine in magazinelist %}
     <div class="row mb-4">
         <div class="col-md-1.5 offset-md-3">
@@ -82,9 +83,10 @@
             </h6>
         </div>
     {% if user.is_authenticated %}
+    
         <div class="col-md-6 offset-md-5 mb-4">
             <a 
-            href="#"
+            href="{{ magazine.pdf_file.id }}"
             style="width: 80px;"
             class="btn btn-primary"
             >
@@ -111,6 +113,7 @@
             >
                 Detail
             </a>
+    
         </div>
     {% else %}
     <div class="col-md-6 offset-md-5 mb-4">

@@ -2,6 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+class UploadMagazine(models.Model):
+    title_name = models.CharField(max_length=100)
+    pdf = models.FileField(upload_to='magazine_pdf')
+    
+
+    def __str__(self):
+        return self.title_name
+
 class Newspaper(models.Model):
     prod_code = models.IntegerField(default=100)
     for_user = models.CharField(max_length=100, 
@@ -48,6 +56,8 @@ class Magazine(models.Model):
                                     max_length=500,
                                     default="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/1200px-Placeholder_book.svg.png"
                                     )
+    
+    pdf_file = models.ForeignKey(UploadMagazine, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.magazine_name
@@ -275,9 +285,3 @@ class UploadComic(models.Model):
     def __str__(self):
         return self.title_name
 
-class UploadMagazine(models.Model):
-    title_name = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='magazine_pdf')
-
-    def __str__(self):
-        return self.title_name

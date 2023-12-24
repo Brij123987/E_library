@@ -14,7 +14,7 @@ class NewspaperForm(forms.ModelForm):
 class MagazineForm(forms.ModelForm):
     class Meta:
         model = Magazine
-        fields = ['prod_code','for_user','magazine_name','magazine_desc','magazine_price','magazine_image']
+        fields = ['prod_code','for_user','magazine_name','magazine_desc','magazine_price','magazine_image','pdf_file']
 
 class ComicForm(forms.ModelForm):
     class Meta:
