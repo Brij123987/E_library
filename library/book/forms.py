@@ -19,7 +19,7 @@ class MagazineForm(forms.ModelForm):
 class ComicForm(forms.ModelForm):
     class Meta:
         model = Comic
-        fields = ['prod_code','for_user','comic_name','comic_desc','comic_price','comic_image']
+        fields = ['prod_code','for_user','comic_name','comic_desc','comic_price','comic_image','pdf_file']
 
 class ContactForm(forms.ModelForm):
     class Meta:
