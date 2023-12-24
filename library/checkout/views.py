@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from checkout.models import Checkout_Detail
 from checkout.forms import Checkout_Forms
 from django.http import JsonResponse
-from book.context_processors import contact_form_context
 import json
 import datetime
 
@@ -39,14 +38,12 @@ def payment_page(request):
         contact = val.contact_number
         pin = val.pin_code
         order_id = val.order_id
-        print(order_id)
     profile = request.user.email
     item_data = request.session.get('item_data', [])
 
     total_price = request.session.get('total_price', 0)
     
     
-
     context = {
         'name':name,
         'address':address,
@@ -57,7 +54,7 @@ def payment_page(request):
         'item_data':item_data,
         'total_price':total_price,
         'today':today,
-        'time':time
+        'time':time,
     }
 
     return render(request, 'checkout/checkout.html', context)
@@ -68,10 +65,15 @@ def OnApprove(request):
 
   if request.method == 'POST':
     body = json.loads(request.body)
-    print(body)
+    status = body.get('status', None)
+    
+    if status == 'COMPLETED':
+        pass
 
+    trans_id = body.get('transID',None)
+    print(trans_id)
+    
     context = {
-
     }
 
     return JsonResponse(context)
@@ -93,6 +95,7 @@ def PaymentSuccess(request):
     item_data = request.session.get('item_data', [])
 
     total_price = request.session.get('total_price', 0)
+     
     
 
     context = {
@@ -105,6 +108,6 @@ def PaymentSuccess(request):
         'item_data':item_data,
         'total_price':total_price,
         'today':today,
-        'time':time
+        'time':time,
     }
     return render(request, 'checkout/paymentsuccess.html', context)

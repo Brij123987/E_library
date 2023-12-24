@@ -22,7 +22,6 @@
               height="120px"
               width="100px"
               >
-            
             </a>
           </li>
           <li class="page-item"><a class="page-link" href="{% url 'book:magazine' %}">
@@ -85,7 +84,7 @@
     {% if user.is_authenticated %}
         <div class="col-md-6 offset-md-5 mb-4">
             <a 
-            href="#" download
+            href="#"
             style="width: 80px;"
             class="btn btn-primary"
             >
@@ -99,7 +98,7 @@
                 Add to Cart
             </a>
             <a 
-            href="#"
+            href="{% url 'addcart:add_magazine_to_cart' magazine_id=magazine.id %}"
             style="width: 80px;"
             class="btn btn-info"
             >

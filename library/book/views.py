@@ -1,17 +1,15 @@
 from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from book.models import Newspaper
 from book.models import Magazine
 from book.models import Comic
 from book.models import TimesofIndia, HindustanTime, IndianExpress, IndiaToday
 from book.forms import UploadTimesofIndiaNewspaper,NewspaperForm, MagazineForm, ComicForm, ContactForm
 from book.forms import UploadHindustanNewspaper, UploadIndianExpressNewspaper, UploadIndiaTodayNewspaper
-from addcart.models import CartItem
 from book.forms import UploadComicPdf, UploadMagazinePdf
 from book.models import UploadComic, UploadMagazine
-import os
+
 
 
 # Create your views here.
@@ -36,6 +34,7 @@ def index(request):
 
 def magazine(request):
     magazinelist = Magazine.objects.all()
+    
 
     context = {
         'magazinelist':magazinelist
@@ -466,4 +465,7 @@ def upload_magazine(request, detail_id):
         }
     
     return render(request,'book/uploadComicMagazine.html',context)
+
+
+
 
