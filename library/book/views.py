@@ -8,7 +8,7 @@ from book.models import TimesofIndia, HindustanTime, IndianExpress, IndiaToday
 from book.forms import UploadTimesofIndiaNewspaper,NewspaperForm, MagazineForm, ComicForm, ContactForm
 from book.forms import UploadHindustanNewspaper, UploadIndianExpressNewspaper, UploadIndiaTodayNewspaper
 from book.forms import UploadComicPdf, UploadMagazinePdf
-from book.models import UploadComic, UploadMagazine
+
 
 
 
@@ -34,10 +34,7 @@ def index(request):
 
 def magazine(request):
     magazinelist = Magazine.objects.all()
-    for mag in magazinelist:
-        print(mag.pdf_file)
-
-
+ 
     context = {
         'magazinelist':magazinelist,
     }

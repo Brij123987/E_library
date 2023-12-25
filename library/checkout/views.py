@@ -4,6 +4,7 @@ from checkout.forms import Checkout_Forms
 from django.http import JsonResponse
 import json
 import datetime
+from checkout.models import Transaction
 
 
 
@@ -68,12 +69,21 @@ def OnApprove(request):
     status = body.get('status', None)
     
     if status == 'COMPLETED':
-        pass
+        trans_id = body.get('transID', None)
+        payment_method = body.get('payment_method', None)
 
-    trans_id = body.get('transID',None)
-    print(trans_id)
+        new_transaction = Transaction.objects.create(
+            trans_id = trans_id,
+            status = status,
+            payment_method = payment_method
+        )
+
+    
     
     context = {
+        'trans_id': new_transaction.trans_id,
+        'payment_method': new_transaction.payment_method,
+        'status': new_transaction.status,
     }
 
     return JsonResponse(context)
