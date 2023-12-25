@@ -78,8 +78,8 @@ def OnApprove(request):
             payment_method = payment_method
         )
 
-    
-    
+        request.session['trans_id'] = new_transaction.trans_id
+
     context = {
         'trans_id': new_transaction.trans_id,
         'payment_method': new_transaction.payment_method,
@@ -105,8 +105,9 @@ def PaymentSuccess(request):
     item_data = request.session.get('item_data', [])
 
     total_price = request.session.get('total_price', 0)
+
+    trans_id = request.session.get('trans_id')
      
-    
 
     context = {
         'name':name,
@@ -119,5 +120,6 @@ def PaymentSuccess(request):
         'total_price':total_price,
         'today':today,
         'time':time,
+        'trans_id':trans_id
     }
     return render(request, 'checkout/paymentsuccess.html', context)
