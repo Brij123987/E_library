@@ -69,7 +69,7 @@
             </h3>
             <h5
             style="font-style: italic;
-            font-size: 1 rem;
+            font-size: 1rem;
             "
             >
                 {{ item.item_desc | truncatewords:4 }}
@@ -79,11 +79,7 @@
             >
                 <b>Rs.{{ item.item_price }}</b>
             </h5>
-            <h6
-            style="font-style: italic;"
-            >
-                added by superuser:
-            </h6>
+
         </div>
 
     {% if user.is_authenticated %}

@@ -76,22 +76,24 @@
             style="font-style: italic;">
                 <b>Rs.{{ magazine.magazine_price }}</b>
             </h5>
-            <h6
-            style="font-style: italic;"
-            >
-                added by superuser:
-            </h6>
+
         </div>
     {% if user.is_authenticated %}
     
         <div class="col-md-6 offset-md-5 mb-4">
+        {% if magazine.is_payment_completed %}
+            <p>Payment is completed for {{ magazine.magazine_name }}</p>
             <a 
-            href="{{ magazine.pdf_file.pdf.url }}"
-            style="width: 80px;"
-            class="btn btn-primary"
+                href="{{ comic.pdf_file.pdf.url }}"
+                style="width: 80px;"
+                class="btn btn-primary"
             >
                 Open
             </a>
+        {% else %}
+            <p>Payment not completed for {{ magazine.magazine_name }}</p>
+        {% endif %}
+        
             <a 
             href="{% url 'addcart:add_magazine_to_cart' magazine_id=magazine.id %}"
             style="width: 150px;"

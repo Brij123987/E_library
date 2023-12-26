@@ -1,4 +1,5 @@
 from django.db import models
+from checkout.models import Transaction
 
 # Create your models here.
 
@@ -51,6 +52,10 @@ class Comic(models.Model):
 
     def __str__(self):
         return str(self.comic_name)
+    
+    def is_payment_completed(self):
+        # Check if there is a Transaction with the same comic_id and status is "completed"
+       return self.transaction and self.transaction.status == 'completed'
 
 class Magazine(models.Model):
     prod_code = models.IntegerField(default=100)
@@ -70,6 +75,10 @@ class Magazine(models.Model):
 
     def __str__(self):
         return self.magazine_name
+    
+    def is_payment_completed(self):
+        # Check if there is a Transaction with the same magazine_id and status is "completed"
+        return Transaction.objects.filter(trans_id=str(self.id), status='COMPLETED').exists()
 
 class Contact(models.Model):
     email = models.EmailField()

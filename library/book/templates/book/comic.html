@@ -77,22 +77,24 @@
             >
                 <b>Rs.{{ comic.comic_price }}</b>
             </h5>
-            <h6
-            style="font-style: italic;"
-            >
-                added by superuser:
-            </h6>
+
         </div>
     
     {% if user.is_authenticated %}
         <div class="col-md-6 offset-md-5 mb-4">
+        {% if comic.is_payment_completed %}
+            <p>Payment is completed for {{ comic.comic_name }}</p>
             <a 
-            href="{{ comic.pdf_file.pdf.url }}"
-            style="width: 80px;"
-            class="btn btn-primary"
+                href="{{ comic.pdf_file.pdf.url }}"
+                style="width: 80px;"
+                class="btn btn-primary"
             >
                 Open
-            </a>           
+            </a>
+        {% else %}
+            <p>Payment not completed for {{ comic.comic_name }}</p>
+        {% endif %}
+                  
             <a 
             href="{% url 'addcart:add_comic_to_cart' comic_id=comic.id %}"
             style="width: 150px;"
