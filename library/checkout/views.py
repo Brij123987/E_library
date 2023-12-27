@@ -111,7 +111,11 @@ def OnApprove(request):
 
 
 def PaymentSuccess(request):
+    user = request.user
+    cart_items = CartItem.objects.filter(user=user)
+
     check = Checkout_Detail.objects.all()
+
     today = datetime.date.today()
     now = datetime.datetime.now()
     time = now.time()
@@ -142,4 +146,7 @@ def PaymentSuccess(request):
         'time':time,
         'trans_id':trans_id
     }
+
+    cart_items.delete()
+
     return render(request, 'checkout/paymentsuccess.html', context)
