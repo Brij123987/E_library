@@ -83,7 +83,7 @@
     {% if user.is_authenticated %}
         <div class="col-md-6 offset-md-5 mb-4">
         {% if comic.is_payment_completed %}
-            <p>Payment is completed for {{ comic.comic_name }}</p>
+            <p>Payment is completed for <b>{{ comic.comic_name }}</b></p>
             <a 
                 href="{{ comic.pdf_file.pdf.url }}"
                 style="width: 80px;"
@@ -92,7 +92,7 @@
                 Open
             </a>
         {% else %}
-            <p>Payment not completed for {{ comic.comic_name }}</p>
+            <p>Payment not completed for <b>{{ comic.comic_name }}</b></p>
         {% endif %}
                   
             <a 

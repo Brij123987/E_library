@@ -82,16 +82,16 @@
     
         <div class="col-md-6 offset-md-5 mb-4">
         {% if magazine.is_payment_completed %}
-            <p>Payment is completed for {{ magazine.magazine_name }}</p>
+            <p style="font-style: italic;">Payment is completed for: <b>{{ magazine.magazine_name }}</b></p>
             <a 
-                href="{{ comic.pdf_file.pdf.url }}"
+                href="{{ magazine.pdf_file.pdf.url }}"
                 style="width: 80px;"
                 class="btn btn-primary"
             >
                 Open
             </a>
         {% else %}
-            <p>Payment not completed for {{ magazine.magazine_name }}</p>
+            <p style="font-style: italic;">Payment not completed for <b>{{ magazine.magazine_name }}</b></p>
         {% endif %}
         
             <a 

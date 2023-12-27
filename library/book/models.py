@@ -49,13 +49,14 @@ class Comic(models.Model):
                                     )
     
     pdf_file = models.ForeignKey(UploadComic, on_delete=models.SET_NULL, null=True, blank=True)
+    transaction = models.ForeignKey(Transaction, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return str(self.comic_name)
     
     def is_payment_completed(self):
         # Check if there is a Transaction with the same comic_id and status is "completed"
-       return self.transaction and self.transaction.status == 'completed'
+       return self.transaction and self.transaction.status.upper() == 'COMPLETED'
 
 class Magazine(models.Model):
     prod_code = models.IntegerField(default=100)
@@ -72,13 +73,14 @@ class Magazine(models.Model):
                                     )
     
     pdf_file = models.ForeignKey(UploadMagazine, on_delete=models.SET_NULL, null=True, blank=True)
+    transaction = models.ForeignKey(Transaction, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.magazine_name
     
     def is_payment_completed(self):
         # Check if there is a Transaction with the same magazine_id and status is "completed"
-        return Transaction.objects.filter(trans_id=str(self.id), status='COMPLETED').exists()
+        return self.transaction and self.transaction.status.upper() == 'COMPLETED'
 
 class Contact(models.Model):
     email = models.EmailField()

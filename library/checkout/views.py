@@ -5,6 +5,9 @@ from django.http import JsonResponse
 import json
 import datetime
 from checkout.models import Transaction
+from django.contrib import messages
+from book.models import Comic, Magazine
+from addcart.models import CartItem
 
 
 
@@ -63,31 +66,48 @@ def payment_page(request):
 
 
 def OnApprove(request):
+    if request.method == 'POST':
+        try:
+            body = json.loads(request.body)
+            status = body.get('status', None)
 
-  if request.method == 'POST':
-    body = json.loads(request.body)
-    status = body.get('status', None)
+            if status == 'COMPLETED':
+                trans_id = body.get('transID', None)
+                payment_method = body.get('payment_method', None)
+
+                new_transaction = Transaction.objects.create(
+                    trans_id=trans_id,
+                    status=status,
+                    payment_method=payment_method
+                )
+
+                request.session['trans_id'] = new_transaction.trans_id
+
+                # Get the user's cart items
+                user = request.user
+                cart_items = CartItem.objects.filter(user=user)
+
+                # Loop through cart items and associate with the transaction
+                for cart_item in cart_items:
+                    content_object = cart_item.content_object
+                    if isinstance(content_object, Comic):
+                        content_object.transaction = new_transaction
+                        content_object.save()
+                    elif isinstance(content_object, Magazine):
+                        content_object.transaction = new_transaction
+                        content_object.save()
+
+                messages.success(request, 'Payment successful. Your items are now associated with the transaction.')
+
+        except Exception as e:
+            messages.error(request, f'Error processing payment: {str(e)}')
+
+        context = {
+
+        }
+        # Redirect to the 'checkout:paymentsuccess' page regardless of success or failure
+        return JsonResponse(context)
     
-    if status == 'COMPLETED':
-        trans_id = body.get('transID', None)
-        payment_method = body.get('payment_method', None)
-
-        new_transaction = Transaction.objects.create(
-            trans_id = trans_id,
-            status = status,
-            payment_method = payment_method
-        )
-
-        request.session['trans_id'] = new_transaction.trans_id
-
-    context = {
-        'trans_id': new_transaction.trans_id,
-        'payment_method': new_transaction.payment_method,
-        'status': new_transaction.status,
-    }
-
-    return JsonResponse(context)
-
 
 
 def PaymentSuccess(request):
