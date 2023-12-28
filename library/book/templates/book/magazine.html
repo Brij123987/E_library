@@ -81,7 +81,7 @@
     {% if user.is_authenticated %}
     
         <div class="col-md-6 offset-md-5 mb-4">
-        {% if magazine.is_payment_completed %}
+        {% if magazine.transaction.user == user and magazine.is_payment_completed %}
             <p style="font-style: italic;">Payment is completed for: <b>{{ magazine.magazine_name }}</b></p>
             <a 
                 href="{{ magazine.pdf_file.pdf.url }}"

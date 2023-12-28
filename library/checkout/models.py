@@ -27,6 +27,7 @@ class Transaction(models.Model):
     trans_id = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
     payment_method = models.CharField(max_length=255)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 
     def __str__(self):

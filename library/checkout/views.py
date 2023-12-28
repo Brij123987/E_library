@@ -78,7 +78,8 @@ def OnApprove(request):
                 new_transaction = Transaction.objects.create(
                     trans_id=trans_id,
                     status=status,
-                    payment_method=payment_method
+                    payment_method=payment_method,
+                    user = request.user
                 )
 
                 request.session['trans_id'] = new_transaction.trans_id
@@ -89,13 +90,15 @@ def OnApprove(request):
 
                 # Loop through cart items and associate with the transaction
                 for cart_item in cart_items:
+                    cart_item.user == request.user
+                    cart_item.save()
                     content_object = cart_item.content_object
                     if isinstance(content_object, Comic):
-                        content_object.transaction = new_transaction
-                        content_object.save()
+                            content_object.transaction = new_transaction
+                            content_object.save()
                     elif isinstance(content_object, Magazine):
-                        content_object.transaction = new_transaction
-                        content_object.save()
+                            content_object.transaction = new_transaction
+                            content_object.save()
 
                 messages.success(request, 'Payment successful. Your items are now associated with the transaction.')
 
