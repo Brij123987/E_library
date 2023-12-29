@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from addcart.models import CartItem
 from users.models import Profile
 import random
+import datetime
 
 random_number = random.randint(10000,9999999)
 
@@ -35,5 +36,17 @@ class Transaction(models.Model):
             self.trans_id,
         ))
 
+class Transaction_Details(models.Model):
+    trans = models.ForeignKey(Transaction, on_delete=models.CASCADE)
+    orders = models.ForeignKey(Checkout_Detail, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return str((
+            self.trans.trans_id,
+            self.orders.order_id,
+            self.created_at
+        ))
 
 
