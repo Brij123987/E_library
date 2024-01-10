@@ -11,7 +11,10 @@ from addcart.models import CartItem
 
 
 
+
 # Create your views here.
+
+# Cumtomers Details -----------------------------
 
 def chk_form(request):
     if request.method == 'POST':
@@ -30,6 +33,8 @@ def chk_form(request):
 
     return render(request, 'checkout/check_page.html', context)
 
+
+# Payment Page --------------------------
 
 def payment_page(request):
     check = Checkout_Detail.objects.all()
@@ -63,6 +68,8 @@ def payment_page(request):
 
     return render(request, 'checkout/checkout.html', context)
 
+
+# Paypal Integration ------------------------------
 
 
 def OnApprove(request):
@@ -112,6 +119,7 @@ def OnApprove(request):
         return JsonResponse(context)
     
 
+# Payment Success Page -------------------------------
 
 def PaymentSuccess(request):
     user = request.user
@@ -153,3 +161,6 @@ def PaymentSuccess(request):
     cart_items.delete()
 
     return render(request, 'checkout/paymentsuccess.html', context)
+
+
+
