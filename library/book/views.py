@@ -466,5 +466,7 @@ def upload_magazine(request, detail_id):
     return render(request,'book/uploadComicMagazine.html',context)
 
 
+def about(request):
 
+    return render(request,'book/about.html')
 

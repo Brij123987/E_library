@@ -102,4 +102,6 @@ urlpatterns = [
 
     path('upload_magazine/<int:detail_id>/',views.upload_magazine, name='uploadmagazine'),
 
+    path('about/',views.about, name='about'),
+
 ]
