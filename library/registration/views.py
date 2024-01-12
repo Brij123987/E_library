@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -7,6 +6,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -50,10 +50,11 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, f'Congratulation, your password has been changed successfully, Now you can login again.')
+            logout(request)  # Log the user out after changing the password
+            messages.success(request, f'Congratulations, your password has been changed successfully. Please log in again.')
             return redirect('users:login')
         
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'registration/change_password.html', {'form':form})
+    return render(request, 'registration/change_password.html', {'form': form})
 
