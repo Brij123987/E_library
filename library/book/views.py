@@ -477,3 +477,7 @@ def contact(request):
 def team(request):
 
     return render(request, 'book/team.html')
+
+def service(request):
+
+    return render(request, 'book/service.html')

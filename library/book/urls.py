@@ -108,4 +108,6 @@ urlpatterns = [
 
     path('team/',views.team, name='team'),
 
+    path('service/',views.service, name='service'),
+
 ]
