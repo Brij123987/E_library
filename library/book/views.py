@@ -8,6 +8,7 @@ from book.models import TimesofIndia, HindustanTime, IndianExpress, IndiaToday
 from book.forms import UploadTimesofIndiaNewspaper,NewspaperForm, MagazineForm, ComicForm, ContactForm
 from book.forms import UploadHindustanNewspaper, UploadIndianExpressNewspaper, UploadIndiaTodayNewspaper
 from book.forms import UploadComicPdf, UploadMagazinePdf
+from django.core.paginator import Paginator
 
 
 
@@ -353,6 +354,12 @@ def news_views(request, item_id):
     today = IndiaToday.objects.all()
     news_id = Newspaper.objects.get(pk=item_id)
 
+    # Paginator
+    paginator_news = Paginator(news, 31)
+    page = request.GET.get('page')
+    news = paginator_news.get_page(page)
+   
+    
     context = {
         'news': news,
         'hind': hind,

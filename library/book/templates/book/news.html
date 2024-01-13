@@ -73,7 +73,21 @@
             
             {% endif %}
 
+    <!-- Current Page -->
+
+        Page: {{ news.number }} of {{ news.paginator.num_pages }}
+
+        {% if news.has_next %}
+          <a href="?page={{ news.next_page_number }}">
+            Next
+          </a>
+          <a href="?page={{ news.paginator.num_pages }}">
+            Last
+          </a>
+        {% endif %}
     
+    
+    <!-- End Code for Pagination -->
 
 {% endblock %}
 </body>
