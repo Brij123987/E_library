@@ -473,3 +473,7 @@ def about(request):
 def contact(request):
 
     return render(request,'book/contact.html')
+
+def team(request):
+
+    return render(request, 'book/team.html')

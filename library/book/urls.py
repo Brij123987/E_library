@@ -106,4 +106,6 @@ urlpatterns = [
 
     path('contact/',views.contact, name='contact'),
 
+    path('team/',views.team, name='team'),
+
 ]
