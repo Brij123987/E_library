@@ -470,3 +470,6 @@ def about(request):
 
     return render(request,'book/about.html')
 
+def contact(request):
+
+    return render(request,'book/contact.html')
